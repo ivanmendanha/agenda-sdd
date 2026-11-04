@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "promote_threshold": 2,
+  "window_days": 45,
+  "quarantine_threshold": 2,
+  "next_id": 3,
+  "lessons": [
+    {
+      "id": "L-001",
+      "key": "weak_test::for spa chrome claims use a walk or browser proof of the visible shell not only a blade mount assertion on id app",
+      "text": "For SPA chrome claims, use a walk or browser proof of the visible shell—not only a Blade mount assertion on id=app",
+      "signal": "weak_test",
+      "scope": "frontend",
+      "status": "candidate",
+      "features": [
+        "app-layout"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C15 (frontend)"
+      ],
+      "created": "2026-11-04T22:16:40Z",
+      "last_seen": "2026-11-04T22:16:40Z"
+    },
+    {
+      "id": "L-002",
+      "key": "weak_test::when a criterion says every route shows chrome prove each route walk or capture a single page screenshot does not cover the others",
+      "text": "When a criterion says every route shows chrome, prove each route (walk or capture)—a single page screenshot does not cover the others",
+      "signal": "weak_test",
+      "scope": "frontend",
+      "status": "candidate",
+      "features": [
+        "app-layout"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C1 (frontend)"
+      ],
+      "created": "2026-11-04T22:16:40Z",
+      "last_seen": "2026-11-04T22:16:40Z"
+    }
+  ]
+}
