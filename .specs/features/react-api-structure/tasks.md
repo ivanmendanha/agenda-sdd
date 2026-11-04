@@ -128,8 +128,8 @@ T2 → T6
 
 **Done when**:
 
-- [ ] `plugins` include the React plugin
-- [ ] Laravel plugin `input` includes the React entry under `resources/js` (`.jsx` or `.tsx`)
+- [x] `plugins` include the React plugin
+- [x] Laravel plugin `input` includes the React entry under `resources/js` (`.jsx` or `.tsx`)
 
 **Tests**: none - config; Build gate after entry exists (T6)
 **Gate**: build — config file updated; `npm run build` runs green after T6
