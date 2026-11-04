@@ -248,4 +248,4 @@ Proof: run feature | Spa shell serves unknown path
 ## Handoff
 
 **Walked:** 2026-11-04 — `SESSION_DRIVER=array` `php artisan serve` on :8010 with production Vite build; Chrome headless at 1280×800 on `/` shows logo `📅 Reserva de Salas`, tabs Dashboard/Salas/Minhas Reservas (Dashboard active), placeholder below nav, no domain widgets; `/salas` and `/minhas-reservas` deep links mark matching tab active; `/caminho-inexistente` keeps chrome and shows not-found placeholder; tokens present in `resources/css/app.css`; saved `captures/room-booking-layout.running.png` from `/`.
-**Dispatched:**
+**Dispatched:** Verifier + screens @ HEAD b9d811e (pending return)
