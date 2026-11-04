@@ -162,10 +162,10 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] Entry renders `BrowserRouter` with routes `/`, `/salas`, `/minhas-reservas`, and `*`
-- [ ] Shared layout (topbar + nav + outlet) wraps matched routes
-- [ ] Health status / health error UI is not rendered on the main shell
-- [ ] `npm run build` and `npm run typecheck` succeed
+- [x] Entry renders `BrowserRouter` with routes `/`, `/salas`, `/minhas-reservas`, and `*`
+- [x] Shared layout (topbar + nav + outlet) wraps matched routes
+- [x] Health status / health error UI is not rendered on the main shell
+- [x] `npm run build` and `npm run typecheck` succeed
 
 **Tests**: none - layout chrome; matrix row "Layout chrome / tokens / nav active"
 **Gate**: build — `npm run build; npm run typecheck`
