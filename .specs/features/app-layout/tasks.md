@@ -142,9 +142,9 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] `DashboardPage`, `SalasPage`, `MinhasReservasPage`, and `NotFoundPage` exist under `resources/js/pages`
-- [ ] None of them render mockup dashboard stats, rooms grid, or reservations list UI
-- [ ] Each is a minimal placeholder suitable for the content outlet
+- [x] `DashboardPage`, `SalasPage`, `MinhasReservasPage`, and `NotFoundPage` exist under `resources/js/pages`
+- [x] None of them render mockup dashboard stats, rooms grid, or reservations list UI
+- [x] Each is a minimal placeholder suitable for the content outlet
 
 **Tests**: none - layout chrome placeholders; matrix row "Layout chrome / tokens / nav active"
 **Gate**: build — `npm run typecheck`
