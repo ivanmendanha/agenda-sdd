@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Reserva de Salas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A90E2;
+            --primary-dark: #357ABD;
+            --success: #52C41A;
+            --danger: #FF4D4F;
+            --warning: #FAAD14;
+            --text-primary: #262626;
+            --text-secondary: #595959;
+            --text-tertiary: #8C8C8C;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F5F7FA;
+            --bg-tertiary: #E8E8E8;
+            --border: #D9D9D9;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow);
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #FF7875;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Tables */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            text-align: left;
+            padding: 12px;
+            background: var(--bg-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .table tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        /* Status Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: #F6FFED;
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: #FFFBE6;
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background: #FFF2F0;
+            color: var(--danger);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* Room Card */
+        .room-card {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .room-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .room-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .room-capacity {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: var(--bg-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-tertiary);
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-success {
+            background: #F6FFED;
+            border: 1px solid #B7EB8F;
+            color: #389E0D;
+        }
+
+        .alert-danger {
+            background: #FFF2F0;
+            border: 1px solid #FFCCC7;
+            color: #CF1322;
+        }
+
+        .alert-warning {
+            background: #FFFBE6;
+            border: 1px solid #FFE58F;
+            color: #D48806;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th,
+            .table td {
+                padding: 8px;
+            }
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-tertiary);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">📅 Reserva de Salas</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showTab('rooms')">Salas</button>
+            <button class="nav-tab" onclick="showTab('myReservations')">Minhas Reservas</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboardTab">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 class="card-title" style="margin-bottom: 0;">Reservas de Hoje</h2>
+                    <button class="btn btn-primary" onclick="openNewReservationModal()">
+                        + Nova Reserva
+                    </button>
+                </div>
+                
+                <div id="todayReservations"></div>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
+                        Total de Reservas
+                    </div>
+                    <div style="font-size: 32px; font-weight: 600; color: var(--primary);" id="totalReservations">0</div>
+                </div>
+                <div class="card">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
+                        Minhas Reservas Ativas
+                    </div>
+                    <div style="font-size: 32px; font-weight: 600; color: var(--success);" id="myActiveReservations">0</div>
+                </div>
+                <div class="card">
+                    <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">
+                        Salas Disponíveis
+                    </div>
+                    <div style="font-size: 32px; font-weight: 600; color: var(--warning);" id="availableRooms">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms Tab -->
+        <div id="roomsTab" class="hidden">
+            <div class="card">
+                <h2 class="card-title">Salas Disponíveis</h2>
+                <div class="grid grid-3" id="roomsList"></div>
+            </div>
+        </div>
+
+        <!-- My Reservations Tab -->
+        <div id="myReservationsTab" class="hidden">
+            <div class="card">
+                <h2 class="card-title">Minhas Reservas</h2>
+                <div id="myReservationsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Reservation Modal -->
+    <div id="newReservationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Reserva</h3>
+                <button class="modal-close" onclick="closeModal('newReservationModal')">&times;</button>
+            </div>
+            
+            <form id="newReservationForm">
+                <div class="form-group">
+                    <label class="form-label">Sala</label>
+                    <select class="form-select" id="reservationRoom" required></select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Data</label>
+                    <input type="date" class="form-input" id="reservationDate" required>
+                </div>
+                
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Hora Início</label>
+                        <input type="time" class="form-input" id="reservationStartTime" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Hora Fim</label>
+                        <input type="time" class="form-input" id="reservationEndTime" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Assunto</label>
+                    <input type="text" class="form-input" id="reservationSubject" placeholder="Ex: Reunião de planejamento" required>
+                </div>
+                
+                <div id="reservationAlert"></div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('newReservationModal')" style="flex: 1;">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        Confirmar Reserva
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reservation Details Modal -->
+    <div id="reservationDetailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalhes da Reserva</h3>
+                <button class="modal-close" onclick="closeModal('reservationDetailsModal')">&times;</button>
+            </div>
+            
+            <div id="reservationDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const currentUser = { id: 1, name: 'Usuário' };
+
+        let rooms = [
+            { id: 1, name: 'Sala 101', capacity: 8, features: ['Projetor', 'Quadro Branco', 'Videoconferência'] },
+            { id: 2, name: 'Sala 102', capacity: 4, features: ['Quadro Branco', 'TV'] },
+            { id: 3, name: 'Sala 201', capacity: 12, features: ['Projetor', 'Videoconferência', 'Sistema de Som'] },
+            { id: 4, name: 'Sala 202', capacity: 6, features: ['Projetor', 'Quadro Branco'] },
+            { id: 5, name: 'Sala 301', capacity: 20, features: ['Projetor', 'Videoconferência', 'Sistema de Som', 'Palco'] }
+        ];
+
+        let reservations = [
+            {
+                id: 1,
+                roomId: 1,
+                userId: 1,
+                date: new Date().toISOString().split('T')[0],
+                startTime: '09:00',
+                endTime: '10:00',
+                subject: 'Reunião de planejamento',
+                status: 'active',
+                version: 1
+            },
+            {
+                id: 2,
+                roomId: 2,
+                userId: 1,
+                date: new Date().toISOString().split('T')[0],
+                startTime: '14:00',
+                endTime: '15:00',
+                subject: 'Review de código',
+                status: 'active',
+                version: 1
+            }
+        ];
+
+        // Navigation
+        function showTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('[id$="Tab"]').forEach(content => content.classList.add('hidden'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            
+            if (tabName === 'dashboard') loadDashboard();
+            else if (tabName === 'rooms') loadRooms();
+            else if (tabName === 'myReservations') loadMyReservations();
+        }
+
+        // Dashboard
+        function loadDashboard() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayReservations = reservations.filter(r => r.date === today && r.status === 'active');
+            
+            const container = document.getElementById('todayReservations');
+            
+            if (todayReservations.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-title">Nenhuma reserva para hoje</div>
+                    </div>
+                `;
+            } else {
+                let html = '<table class="table"><thead><tr><th>Sala</th><th>Horário</th><th>Assunto</th><th>Ações</th></tr></thead><tbody>';
+                
+                todayReservations.forEach(reservation => {
+                    const room = rooms.find(r => r.id === reservation.roomId);
+                    
+                    html += `
+                        <tr>
+                            <td><strong>${room.name}</strong></td>
+                            <td>${reservation.startTime} - ${reservation.endTime}</td>
+                            <td>${reservation.subject}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" onclick="viewReservation(${reservation.id})">
+                                    Ver Detalhes
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+            
+            // Stats
+            document.getElementById('totalReservations').textContent = reservations.filter(r => r.status === 'active').length;
+            document.getElementById('myActiveReservations').textContent = reservations.filter(r => r.userId === currentUser.id && r.status === 'active').length;
+            document.getElementById('availableRooms').textContent = rooms.length;
+        }
+
+        // Rooms
+        function loadRooms() {
+            const container = document.getElementById('roomsList');
+            let html = '';
+            
+            rooms.forEach(room => {
+                html += `
+                    <div class="room-card" onclick="selectRoom(${room.id})">
+                        <div class="room-name">${room.name}</div>
+                        <div class="room-capacity">Capacidade: ${room.capacity} pessoas</div>
+                        <div class="room-features">
+                            ${room.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectRoom(roomId) {
+            openNewReservationModal();
+            document.getElementById('reservationRoom').value = roomId;
+        }
+
+        // My Reservations
+        function loadMyReservations() {
+            const myReservations = reservations.filter(r => r.userId === currentUser.id && r.status === 'active');
+            const container = document.getElementById('myReservationsList');
+            
+            if (myReservations.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-title">Você não tem reservas ativas</div>
+                    </div>
+                `;
+            } else {
+                let html = '<table class="table"><thead><tr><th>Data</th><th>Sala</th><th>Horário</th><th>Assunto</th><th>Status</th><th>Ações</th></tr></thead><tbody>';
+                
+                myReservations.forEach(reservation => {
+                    const room = rooms.find(r => r.id === reservation.roomId);
+                    const date = new Date(reservation.date + 'T00:00:00').toLocaleDateString('pt-BR');
+                    
+                    html += `
+                        <tr>
+                            <td>${date}</td>
+                            <td><strong>${room.name}</strong></td>
+                            <td>${reservation.startTime} - ${reservation.endTime}</td>
+                            <td>${reservation.subject}</td>
+                            <td><span class="badge badge-success">Ativa</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" onclick="viewReservation(${reservation.id})">
+                                    Ver
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+        }
+
+        // New Reservation
+        function openNewReservationModal() {
+            const modal = document.getElementById('newReservationModal');
+            const form = document.getElementById('newReservationForm');
+            const alertDiv = document.getElementById('reservationAlert');
+            
+            form.reset();
+            alertDiv.innerHTML = '';
+            
+            // Populate rooms
+            const roomSelect = document.getElementById('reservationRoom');
+            roomSelect.innerHTML = rooms.map(room => 
+                `<option value="${room.id}">${room.name} (Capacidade: ${room.capacity})</option>`
+            ).join('');
+            
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reservationDate').min = today;
+            document.getElementById('reservationDate').value = today;
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Validation and Reservation Creation
+        document.getElementById('newReservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const roomId = parseInt(document.getElementById('reservationRoom').value);
+            const date = document.getElementById('reservationDate').value;
+            const startTime = document.getElementById('reservationStartTime').value;
+            const endTime = document.getElementById('reservationEndTime').value;
+            const subject = document.getElementById('reservationSubject').value;
+            
+            const alertDiv = document.getElementById('reservationAlert');
+            
+            // Validation 1: Check active reservations limit (REQ-003)
+            const activeReservations = reservations.filter(r => r.userId === currentUser.id && r.status === 'active');
+            if (activeReservations.length >= 3) {
+                showAlert(alertDiv, 'danger', 'Limite de 3 reservas ativas excedido');
+                return;
+            }
+            
+            // Validation 2: Business hours (REQ-004)
+            const startHour = parseInt(startTime.split(':')[0]);
+            const endHour = parseInt(endTime.split(':')[0]);
+            
+            if (startHour < 8 || endHour > 18) {
+                showAlert(alertDiv, 'danger', 'Reservas permitidas apenas entre 8h e 18h');
+                return;
+            }
+            
+            // Validation 3: Maximum duration (REQ-004)
+            const duration = calculateDuration(startTime, endTime);
+            if (duration > 4) {
+                showAlert(alertDiv, 'danger', 'Duração máxima permitida é de 4 horas');
+                return;
+            }
+            
+            if (duration <= 0) {
+                showAlert(alertDiv, 'danger', 'Horário de fim deve ser posterior ao horário de início');
+                return;
+            }
+            
+            // Validation 4: Time conflict (REQ-001)
+            const conflict = reservations.find(r => 
+                r.roomId === roomId && 
+                r.date === date && 
+                r.status === 'active' &&
+                hasTimeOverlap(startTime, endTime, r.startTime, r.endTime)
+            );
+            
+            if (conflict) {
+                showAlert(alertDiv, 'danger', 'Conflito de horário');
+                return;
+            }
+            
+            // Create reservation
+            const newReservation = {
+                id: reservations.length + 1,
+                roomId: roomId,
+                userId: currentUser.id,
+                date: date,
+                startTime: startTime,
+                endTime: endTime,
+                subject: subject,
+                status: 'active',
+                version: 1
+            };
+            
+            reservations.push(newReservation);
+            
+            showAlert(alertDiv, 'success', 'Reserva criada com sucesso!');
+            
+            setTimeout(() => {
+                closeModal('newReservationModal');
+                loadDashboard();
+            }, 1500);
+        });
+
+        function calculateDuration(startTime, endTime) {
+            const [startH, startM] = startTime.split(':').map(Number);
+            const [endH, endM] = endTime.split(':').map(Number);
+            return (endH * 60 + endM - startH * 60 - startM) / 60;
+        }
+
+        function hasTimeOverlap(start1, end1, start2, end2) {
+            const [h1, m1] = start1.split(':').map(Number);
+            const [h2, m2] = end1.split(':').map(Number);
+            const [h3, m3] = start2.split(':').map(Number);
+            const [h4, m4] = end2.split(':').map(Number);
+            
+            const start1Min = h1 * 60 + m1;
+            const end1Min = h2 * 60 + m2;
+            const start2Min = h3 * 60 + m3;
+            const end2Min = h4 * 60 + m4;
+            
+            return start1Min < end2Min && end1Min > start2Min;
+        }
+
+        function showAlert(container, type, message) {
+            container.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        // View Reservation Details
+        function viewReservation(reservationId) {
+            const reservation = reservations.find(r => r.id === reservationId);
+            const room = rooms.find(r => r.id === reservation.roomId);
+            
+            const date = new Date(reservation.date + 'T00:00:00').toLocaleDateString('pt-BR');
+            
+            const canCancel = canCancelReservation(reservation);
+            const cancelMessage = getCancelMessage(reservation);
+            
+            let html = `
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                        <div>
+                            <div style="font-size: 24px; font-weight: 600; margin-bottom: 4px;">${room.name}</div>
+                            <div style="color: var(--text-secondary);">${reservation.subject}</div>
+                        </div>
+                        <span class="badge badge-success">Ativa</span>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 6px; margin-bottom: 16px;">
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">DATA</div>
+                            <div style="font-size: 16px; font-weight: 500;">${date}</div>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px;">HORÁRIO</div>
+                            <div style="font-size: 16px; font-weight: 500;">${reservation.startTime} - ${reservation.endTime}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+                        <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 8px;">RECURSOS DA SALA</div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            ${room.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                    </div>
+            `;
+            
+            if (canCancel) {
+                html += `
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-secondary" onclick="closeModal('reservationDetailsModal')" style="flex: 1;">
+                            Fechar
+                        </button>
+                        <button class="btn btn-danger" onclick="cancelReservation(${reservation.id})" style="flex: 1;">
+                            Cancelar Reserva
+                        </button>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="alert alert-warning">
+                        ${cancelMessage}
+                    </div>
+                    <button class="btn btn-secondary" onclick="closeModal('reservationDetailsModal')" style="width: 100%;">
+                        Fechar
+                    </button>
+                `;
+            }
+            
+            html += '</div>';
+            
+            document.getElementById('reservationDetails').innerHTML = html;
+            document.getElementById('reservationDetailsModal').classList.add('active');
+        }
+
+        function canCancelReservation(reservation) {
+            // User can only cancel their own reservations
+            if (reservation.userId !== currentUser.id) {
+                return false;
+            }
+            
+            return isCancelAllowedByTime(reservation);
+        }
+
+        function isCancelAllowedByTime(reservation) {
+            const now = new Date();
+            const reservationStart = new Date(reservation.date + 'T' + reservation.startTime);
+            const hoursUntilStart = (reservationStart - now) / (1000 * 60 * 60);
+            
+            return hoursUntilStart >= 2;
+        }
+
+        function getCancelMessage(reservation) {
+            // Check permission
+            if (reservation.userId !== currentUser.id) {
+                return 'Você não tem permissão para cancelar esta reserva';
+            }
+            
+            // Check time limit (REQ-002)
+            const now = new Date();
+            const reservationStart = new Date(reservation.date + 'T' + reservation.startTime);
+            const hoursUntilStart = (reservationStart - now) / (1000 * 60 * 60);
+            
+            if (hoursUntilStart < 2) {
+                return 'Cancelamento permitido apenas com 2h de antecedência';
+            }
+            
+            return '';
+        }
+
+        function cancelReservation(reservationId) {
+            if (!confirm('Tem certeza que deseja cancelar esta reserva?')) {
+                return;
+            }
+            
+            const reservation = reservations.find(r => r.id === reservationId);
+            reservation.status = 'cancelled';
+            
+            closeModal('reservationDetailsModal');
+            loadDashboard();
+            
+            alert('Reserva cancelada com sucesso!');
+        }
+
+        // Initialize
+        loadDashboard();
+    </script>
+</body>
+</html>
