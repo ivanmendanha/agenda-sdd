@@ -146,10 +146,10 @@ T2 → T6
 
 **Done when**:
 
-- [ ] `GET /` is routed to `app` Blade view (update `routes/web.php` as part of this deliverable)
-- [ ] Document contains a root mount element (e.g. `id="app"`)
-- [ ] Document loads the Vite React entry via `@vite`
-- [ ] Feature test asserts `/` is 200, contains the mount element, and does not contain the default Laravel welcome headline
+- [x] `GET /` is routed to `app` Blade view (update `routes/web.php` as part of this deliverable)
+- [x] Document contains a root mount element (e.g. `id="app"`)
+- [x] Document loads the Vite React entry via `@vite`
+- [x] Feature test asserts `/` is 200, contains the mount element, and does not contain the default Laravel welcome headline
 
 **Tests**: feature — extend `tests/Feature/ReactApiStructureTest.php`
 **Gate**: full — `php artisan test --filter=ReactApiStructure`
@@ -202,13 +202,13 @@ T2 → T6
 **Run feature**: `php artisan test --filter=ReactApiStructure --testdox`
 
 **C1** - `GET /` returns HTML that mounts React (STRUCT-01, AC 1)
-Proof: run feature | Root serves React shell
+Proof: run feature | Root serves react shell
 
 **C2** - Vite compiles React via `@vitejs/plugin-react` and a JS/JSX entry (STRUCT-02, AC 2)
 Proof: `npm run build`
 
 **C3** - SPA shell shows a visible React-owned marker (STRUCT-03, AC 3)
-Proof: run feature | Root serves React shell
+Proof: run feature | Root serves react shell
 
 **C4** - `GET /api/health` returns 200 JSON with status ok (STRUCT-04, AC 1)
 Proof: run feature | Health endpoint returns ok

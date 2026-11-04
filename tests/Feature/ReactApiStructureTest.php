@@ -29,4 +29,14 @@ class ReactApiStructureTest extends TestCase
         $response->assertNotFound()
             ->assertHeader('content-type', 'application/json');
     }
+
+    public function test_root_serves_react_shell(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertOk()
+            ->assertSee('id="app"', false)
+            ->assertSee('type="module"', false)
+            ->assertDontSee("Let's get started");
+    }
 }
