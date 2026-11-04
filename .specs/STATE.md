@@ -43,3 +43,9 @@
 - **Status**: AD-005 active
 
 ## Handoff
+
+- **Feature**: app-layout
+- **Phase**: Done — validate_verification green
+- **Completed**: T1–T7, walk, screens matches, verification findings closed
+- **Next**: Domain page features (Dashboard / Salas / Minhas Reservas) against the shared chrome
+- **Branch**: master
