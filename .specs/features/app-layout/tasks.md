@@ -182,9 +182,9 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] `GET /`, `/salas`, `/minhas-reservas`, and an unknown non-API path return 200 HTML containing `id="app"`
-- [ ] `GET /api/health` still returns JSON `{ "status": "ok" }`
-- [ ] Feature tests live in `tests/Feature/AppLayoutTest.php` and pass under `--filter=AppLayout`
+- [x] `GET /`, `/salas`, `/minhas-reservas`, and an unknown non-API path return 200 HTML containing `id="app"`
+- [x] `GET /api/health` still returns JSON `{ "status": "ok" }`
+- [x] Feature tests live in `tests/Feature/AppLayoutTest.php` and pass under `--filter=AppLayout`
 
 **Tests**: feature — `tests/Feature/AppLayoutTest.php` (happy deep links + unknown path shell + API still JSON)
 **Gate**: build — `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test --filter=AppLayout`

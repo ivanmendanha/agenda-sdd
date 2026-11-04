@@ -126,21 +126,21 @@ The React SPA still shows a developer health-check shell. Academic demos need th
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| LAY-01 | P1: Topbar and content frame | Design | Pending |
-| LAY-02 | P1: Topbar and content frame | Design | Pending |
-| LAY-03 | P1: Topbar and content frame | Design | Pending |
-| LAY-04 | P1: Topbar and content frame | Design | Pending |
-| LAY-05 | P1: Primary navigation tabs | Design | Pending |
-| LAY-06 | P1: Primary navigation tabs | Design | Pending |
-| LAY-07 | P1: Primary navigation tabs | Design | Pending |
-| LAY-08 | P1: Primary navigation tabs | Design | Pending |
-| LAY-09 | P1: Primary navigation tabs | Design | Pending |
+| LAY-01 | P1: Topbar and content frame | Implement | Verified |
+| LAY-02 | P1: Topbar and content frame | Implement | Verified |
+| LAY-03 | P1: Topbar and content frame | Implement | Verified |
+| LAY-04 | P1: Topbar and content frame | Implement | Verified |
+| LAY-05 | P1: Primary navigation tabs | Implement | Verified |
+| LAY-06 | P1: Primary navigation tabs | Implement | Verified |
+| LAY-07 | P1: Primary navigation tabs | Implement | Verified |
+| LAY-08 | P1: Primary navigation tabs | Implement | Verified |
+| LAY-09 | P1: Primary navigation tabs | Implement | Verified |
 | LAY-10 | P1: Design tokens | Implement | Verified |
 | LAY-11 | P1: Design tokens | Implement | Verified |
-| LAY-12 | P1: Design tokens | Design | Pending |
-| LAY-13 | P1: Content outlet placeholders | Design | Pending |
-| LAY-14 | P1: Content outlet placeholders | Design | Pending |
-| LAY-15 | P1: Content outlet placeholders | Design | Pending |
+| LAY-12 | P1: Design tokens | Implement | Verified |
+| LAY-13 | P1: Content outlet placeholders | Implement | Verified |
+| LAY-14 | P1: Content outlet placeholders | Implement | Verified |
+| LAY-15 | P1: Content outlet placeholders | Implement | Verified |
 
 **ID format:** `LAY-[NUMBER]`
 
