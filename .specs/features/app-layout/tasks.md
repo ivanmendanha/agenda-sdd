@@ -199,7 +199,7 @@ T4 → T5 → T6 → T7
 **Run feature**: `php artisan test --filter=AppLayout --testdox`
 
 **C1** - Any SPA route shows topbar + content frame as in the capture (LAY-01, AC 1)
-Proof: browser captures/room-booking-layout.running.png
+Proof: walk - open `/`, `/salas`, and `/minhas-reservas`; each shows topbar logo and content frame (composition also in captures/room-booking-layout.running.png)
 
 **C2** - Topbar logo text is exactly `📅 Reserva de Salas` (LAY-02, AC 2)
 Proof: walk - open `/` and read the topbar logo text
@@ -241,11 +241,11 @@ Proof: walk - placeholder content appears below nav tabs inside the container
 Proof: walk - no Reservas de Hoje stats cards, rooms grid, or Minhas Reservas list widgets
 
 **C15** - Unknown SPA path keeps chrome and shows not-found placeholder (LAY-15, AC 3)
-Proof: run feature | Spa shell serves unknown path
+Proof: walk - open `/caminho-inexistente`; topbar + nav remain and content shows Página não encontrada
 
 ---
 
 ## Handoff
 
-**Walked:** 2026-11-04 — `SESSION_DRIVER=array` `php artisan serve` on :8010 with production Vite build; Chrome headless at 1280×800 on `/` shows logo `📅 Reserva de Salas`, tabs Dashboard/Salas/Minhas Reservas (Dashboard active), placeholder below nav, no domain widgets; `/salas` and `/minhas-reservas` deep links mark matching tab active; `/caminho-inexistente` keeps chrome and shows not-found placeholder; tokens present in `resources/css/app.css`; saved `captures/room-booking-layout.running.png` from `/`.
-**Dispatched:** Verifier + screens @ HEAD b9d811e (pending return)
+**Walked:** 2026-11-04 — `SESSION_DRIVER=array` `php artisan serve` on :8010 with production Vite build; Chrome headless at 1280×800 on `/`, `/salas`, and `/minhas-reservas` each shows topbar logo `📅 Reserva de Salas` and content frame with tabs; Dashboard/Salas/Minhas Reservas active styles sync with path on click and deep link; placeholders below nav; no Reservas de Hoje / rooms grid / reservations list widgets; `/caminho-inexistente` keeps topbar+nav and shows `Página não encontrada`; tokens in `resources/css/app.css`; saved `captures/room-booking-layout.running.png` from `/`.
+**Dispatched:** Verifier [911bfe02-2111-41fe-a3c6-491746cd4858] returned FAIL (C1,C15); screens [dcdd84c1-0fd7-46f1-91a0-9c0c39c14bbb] returned matches @ HEAD b9d811e / 731b689
