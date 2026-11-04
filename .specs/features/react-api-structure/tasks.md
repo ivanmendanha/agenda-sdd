@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: none - Design phase skipped (straightforward scaffold)
-**Status**: In Progress
+**Status**: Done
 **Approved**: 2026-11-04 - user: "aprovado"
 **Build**: `npm run build; vendor/bin/pint --test; php artisan test`
 **Run feature**: `php artisan test --filter=ReactApiStructure --testdox`
@@ -166,11 +166,11 @@ T2 → T6
 
 **Done when**:
 
-- [ ] Folders `resources/js/components`, `resources/js/pages`, `resources/js/services` exist
-- [ ] `resources/js/services/api.js` (or `.ts`) can request `/api/health` and return parsed JSON
-- [ ] Mounted App uses the helper and displays the health status text on success
-- [ ] When the health request fails, App still mounts and shows a visible error state
-- [ ] `npm run build` succeeds
+- [x] Folders `resources/js/components`, `resources/js/pages`, `resources/js/services` exist
+- [x] `resources/js/services/api.js` (or `.ts`) can request `/api/health` and return parsed JSON
+- [x] Mounted App uses the helper and displays the health status text on success
+- [x] When the health request fails, App still mounts and shows a visible error state
+- [x] `npm run build` succeeds
 
 **Tests**: none - browser fetch UI has no Dusk in repo; covered by walk proofs for STRUCT-09/10; STRUCT-07 verified by folders existing at gate
 **Gate**: build — `npm run build; php artisan test --filter=ReactApiStructure`
@@ -187,8 +187,8 @@ T2 → T6
 
 **Done when**:
 
-- [ ] Filter `ReactApiStructure` passes entirely
-- [ ] Example welcome-only assumptions updated if `ExampleTest` would fail on `/`
+- [x] Filter `ReactApiStructure` passes entirely
+- [x] Example welcome-only assumptions updated if `ExampleTest` would fail on `/`
 
 **Tests**: feature — same file
 **Gate**: build — `npm run build; vendor/bin/pint --test; php artisan test --filter=ReactApiStructure`
