@@ -90,10 +90,10 @@ T2 → T6
 
 **Done when**:
 
-- [ ] `GET /api/health` returns HTTP 200 and JSON with `"status":"ok"`
-- [ ] Same response without session/credentials
-- [ ] Unknown `/api/does-not-exist` returns a JSON error body (not HTML)
-- [ ] Feature tests cover the above under `tests/Feature/ReactApiStructureTest.php`
+- [x] `GET /api/health` returns HTTP 200 and JSON with `"status":"ok"`
+- [x] Same response without session/credentials
+- [x] Unknown `/api/does-not-exist` returns a JSON error body (not HTML)
+- [x] Feature tests cover the above under `tests/Feature/ReactApiStructureTest.php`
 
 **Tests**: feature — `tests/Feature/ReactApiStructureTest.php` (happy + no-auth + unknown path)
 **Gate**: quick — `php artisan test --filter=ReactApiStructure`
@@ -232,7 +232,7 @@ Proof: walk - open `/` and see health status text from API
 Proof: walk - with API stopped or forced failure, error text visible and root mounted
 
 **C11** - Unknown `/api/*` returns JSON error (STRUCT-11)
-Proof: run feature | Unknown API path returns JSON
+Proof: run feature | Unknown api path returns json
 
 ---
 
