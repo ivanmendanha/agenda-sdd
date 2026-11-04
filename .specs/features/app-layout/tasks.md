@@ -82,8 +82,8 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] `react-router-dom` appears in `package.json` dependencies
-- [ ] `npm install` completes successfully
+- [x] `react-router-dom` appears in `package.json` dependencies
+- [x] `npm install` completes successfully
 
 **Tests**: none - package manifest; matrix row "Vite / CSS tokens / package.json"
 **Gate**: build — `npm install`
@@ -101,10 +101,10 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] Topbar renders logo text exactly `📅 Reserva de Salas` colored with `--primary`
-- [ ] Topbar uses `--bg-primary` and the header shadow token
-- [ ] Content frame is centered with max-width 1200px and horizontal padding matching the capture
-- [ ] Component accepts `children` rendered below the topbar inside the frame structure ready for nav + outlet
+- [x] Topbar renders logo text exactly `📅 Reserva de Salas` colored with `--primary`
+- [x] Topbar uses `--bg-primary` and the header shadow token
+- [x] Content frame is centered with max-width 1200px and horizontal padding matching the capture
+- [x] Component accepts `children` rendered below the topbar inside the frame structure ready for nav + outlet
 
 **Tests**: none - layout chrome; matrix row "Layout chrome / tokens / nav active"
 **Gate**: build — `npm run typecheck`
