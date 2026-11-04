@@ -208,7 +208,7 @@ Proof: run feature | Root serves react shell
 Proof: `npm run build`
 
 **C3** - SPA shell shows a visible React-owned marker (STRUCT-03, AC 3)
-Proof: run feature | Root serves react shell
+Proof: walk - open `/` and see `data-react-root` marker from React
 
 **C4** - `GET /api/health` returns 200 JSON with status ok (STRUCT-04, AC 1)
 Proof: run feature | Health endpoint returns ok
