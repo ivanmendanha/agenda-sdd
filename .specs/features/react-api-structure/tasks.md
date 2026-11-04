@@ -110,8 +110,8 @@ T2 → T6
 
 **Done when**:
 
-- [ ] `react`, `react-dom`, and `@vitejs/plugin-react` appear in `package.json` dependencies/devDependencies
-- [ ] `npm install` completes successfully
+- [x] `react`, `react-dom`, and `@vitejs/plugin-react` appear in `package.json` dependencies/devDependencies
+- [x] `npm install` completes successfully
 
 **Tests**: none - package manifest; verified by Build after T4
 **Gate**: build — `npm install` (install only; full `npm run build` after T4/T6)
