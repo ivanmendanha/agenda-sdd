@@ -237,3 +237,6 @@ Proof: run feature | Unknown api path returns json
 ---
 
 ## Handoff
+
+**Walked:** 2026-11-04 — `SESSION_DRIVER=file` `php artisan serve` on :8010; Chrome headless DOM shows `#app` with `data-react-root` and `API status: ok` from `/api/health`; folders `components`/`pages`/`services` and `services/api.js` `getHealth` present; forced health 404 shows `role="alert"` `data-health-error` with shell still mounted.
+**Dispatched:** Verifier (independent) — screens skipped (capture non-binding; no criterion cites it)
