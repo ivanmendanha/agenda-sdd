@@ -122,10 +122,10 @@ T4 → T5 → T6 → T7
 
 **Done when**:
 
-- [ ] Tabs labeled exactly `Dashboard`, `Salas`, and `Minhas Reservas`
-- [ ] Links target `/`, `/salas`, and `/minhas-reservas` respectively
-- [ ] Active tab uses the mockup active style (primary color + bottom border)
-- [ ] Direct load of `/salas` or `/minhas-reservas` marks the matching tab active
+- [x] Tabs labeled exactly `Dashboard`, `Salas`, and `Minhas Reservas`
+- [x] Links target `/`, `/salas`, and `/minhas-reservas` respectively
+- [x] Active tab uses the mockup active style (primary color + bottom border)
+- [x] Direct load of `/salas` or `/minhas-reservas` marks the matching tab active
 
 **Tests**: none - layout chrome; matrix row "Layout chrome / tokens / nav active"
 **Gate**: build — `npm run typecheck`
