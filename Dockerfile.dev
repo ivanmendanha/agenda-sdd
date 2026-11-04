@@ -1,0 +1,104 @@
+# DevHub Generated - Development Dockerfile
+FROM php:8.5-fpm
+
+ARG user=devhub
+ARG uid=1000
+
+ENV TZ=America/Sao_Paulo \
+    DEBIAN_FRONTEND=noninteractive
+
+# System dependencies + DB clients
+# inotify-tools powers the .env watcher in supervisord (auto config:clear on edit).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    supervisor \
+    procps \
+    unzip \
+    git \
+    curl \
+    gnupg \
+    ca-certificates \
+    pkg-config \
+    inotify-tools \
+    libicu-dev \
+    libzip-dev \
+    zlib1g-dev \
+    libxml2-dev \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libwebp-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libgmp-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    libpq-dev \
+    default-mysql-client \
+    postgresql-client \
+    openssh-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_26.x | bash - && \
+    apt-get install -y nodejs
+
+# PHP core extensions (all DB drivers included)
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
+
+RUN set -eux; \
+    docker-php-ext-install -j"$(nproc)" \
+        pdo_mysql \
+        pdo_pgsql pgsql \
+        pdo_sqlite \
+        mbstring exif pcntl bcmath gd sockets \
+        zip soap intl gmp
+
+# PECL extensions: Redis + MongoDB.
+# `pecl channel-update` first: the base image ships stale channel
+# metadata, and without a refresh pecl ignores the version pin below and
+# silently installs the latest release instead. The MongoDB extension is
+# pinned per PHP version — the current 2.x line requires PHP 8.1+, and
+# 1.17.3 is the last release that still builds on PHP 7.4-8.0. On
+# PHP < 7.4 it is left out (no compatible build) so the image still builds.
+RUN pecl channel-update pecl.php.net && \
+    pecl install -o -f redis mongodb && \
+    docker-php-ext-enable redis mongodb
+
+# Opcache: built-in as core since PHP 8.5 (no-op here); for PHP 8.4 and older
+# it's still a shared extension and needs to be compiled from bundled source.
+RUN if ! php -m | grep -qi "Zend OPcache"; then docker-php-ext-install opcache; fi
+
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Create non-root user
+RUN useradd -u $uid -G www-data,root -m -d /home/$user $user && \
+    mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Supervisor directories
+RUN mkdir -p /var/log/supervisor /var/run/supervisor /run/php \
+    && chown -R $user:$user /var/log/supervisor /var/run/supervisor /run/php
+
+# Supervisor config
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# PHP config
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+
+# Entrypoint — runs Laravel cache cleanup before exec'ing supervisord so
+# every fresh container (down+up, --force-recreate) starts on a clean slate.
+COPY docker/entrypoint.sh /usr/local/bin/devhub-entrypoint.sh
+RUN chmod +x /usr/local/bin/devhub-entrypoint.sh
+
+# Working directory
+WORKDIR /var/www
+
+# Permissions
+RUN chown -R $user:www-data /var/www 2>/dev/null || true
+
+EXPOSE 9000 5174
+
+USER $user
+
+ENTRYPOINT ["/usr/local/bin/devhub-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
