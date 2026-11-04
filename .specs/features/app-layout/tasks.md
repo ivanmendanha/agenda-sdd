@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: `.specs/features/app-layout/design.md`
-**Status**: In Progress
+**Status**: Done
 **Approved**: 2026-11-04 - user: "aprovado"
 **Build**: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 **Run feature**: `php artisan test --filter=AppLayout --testdox`
@@ -246,3 +246,6 @@ Proof: run feature | Spa shell serves unknown path
 ---
 
 ## Handoff
+
+**Walked:** 2026-11-04 — `SESSION_DRIVER=array` `php artisan serve` on :8010 with production Vite build; Chrome headless at 1280×800 on `/` shows logo `📅 Reserva de Salas`, tabs Dashboard/Salas/Minhas Reservas (Dashboard active), placeholder below nav, no domain widgets; `/salas` and `/minhas-reservas` deep links mark matching tab active; `/caminho-inexistente` keeps chrome and shows not-found placeholder; tokens present in `resources/css/app.css`; saved `captures/room-booking-layout.running.png` from `/`.
+**Dispatched:**
