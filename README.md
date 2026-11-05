@@ -1,58 +1,159 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📅 Agenda SDD
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicação web para consultar salas, acompanhar a agenda e gerenciar reservas de
+ambientes. O projeto usa Laravel como backend e uma SPA em React no frontend.
 
-## About Laravel
+> **Estado atual:** a estrutura da SPA, a navegação principal e o endpoint de
+> saúde da API estão implementados. Os fluxos completos de salas e reservas
+> ainda estão em desenvolvimento.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Visão geral
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A interface está organizada em três áreas:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Dashboard:** visão geral das reservas e salas disponíveis;
+- **Salas:** consulta dos ambientes e de seus recursos;
+- **Minhas Reservas:** acompanhamento e gerenciamento das reservas do usuário.
 
-## Learning Laravel
+## Arquitetura
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```mermaid
+flowchart LR
+    U[Usuário] --> SPA[React SPA]
+    SPA -->|HTTP /api| API[Laravel API]
+    API --> DB[(SQLite)]
+    V[Vite] -->|build e HMR| SPA
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+O Laravel entrega o shell da aplicação e mantém as rotas da API. O React Router
+controla a navegação no navegador, enquanto o Vite compila os arquivos
+TypeScript e CSS.
 
-## Contributing
+## Tecnologias
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.3+ e Laravel 13;
+- React 19 e React Router 7;
+- TypeScript 7;
+- Tailwind CSS 4;
+- Vite 8;
+- SQLite;
+- Pest 5.
 
-## Code of Conduct
+## Requisitos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Antes de começar, instale:
 
-## Security Vulnerabilities
+- PHP 8.3 ou superior;
+- Composer;
+- Node.js e npm;
+- extensões do PHP exigidas pelo Laravel e pelo SQLite.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Instalação
 
-## License
+O script de setup instala as dependências, prepara o `.env`, gera a chave da
+aplicação, executa as migrations e compila o frontend:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone <url-do-repositorio>
+cd agenda-sdd
+composer run setup
+```
+
+Por padrão, o projeto usa SQLite. Caso o arquivo do banco ainda não exista:
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+## Executando localmente
+
+Inicie o ambiente de desenvolvimento:
+
+```bash
+composer run dev
+```
+
+O comando inicia os serviços de desenvolvimento do Laravel e do frontend. A URL
+da aplicação é definida por `APP_URL` no arquivo `.env`.
+
+Para executar apenas o frontend com hot reload:
+
+```bash
+npm run dev
+```
+
+## Rotas disponíveis
+
+| Método | Caminho | Descrição |
+| --- | --- | --- |
+| `GET` | `/` | Dashboard da aplicação |
+| `GET` | `/salas` | Lista de salas |
+| `GET` | `/minhas-reservas` | Reservas do usuário |
+| `GET` | `/api/health` | Verificação de saúde da API |
+
+As rotas da interface retornam o mesmo shell React. Endereços desconhecidos sob
+`/api` mantêm a resposta JSON padrão da API.
+
+## Fluxo planejado de reserva
+
+```mermaid
+flowchart TD
+    A[Consultar salas] --> B[Escolher sala e horário]
+    B --> C{Horário disponível?}
+    C -->|Sim| D[Confirmar reserva]
+    C -->|Não| E[Escolher outro horário]
+    E --> B
+    D --> F[Acompanhar em Minhas Reservas]
+```
+
+## Comandos úteis
+
+```bash
+# Executar os testes
+composer test
+
+# Verificar os tipos TypeScript
+npm run typecheck
+
+# Gerar os arquivos de produção
+npm run build
+
+# Formatar o código PHP
+vendor/bin/pint
+```
+
+## Estrutura principal
+
+```text
+app/                    Backend e regras da aplicação
+database/               Migrations, factories e seeders
+resources/js/           SPA React, páginas, componentes e serviços
+resources/css/          Estilos globais
+resources/views/        Shell Blade que hospeda a SPA
+routes/api.php          Endpoints da API
+routes/web.php          Entrada e fallback da interface
+tests/                  Testes automatizados com Pest
+```
+
+## Qualidade
+
+Antes de enviar alterações, execute:
+
+```bash
+composer test
+npm run typecheck
+npm run build
+```
+
+## Próximas etapas
+
+- cadastrar e listar salas;
+- criar, consultar e cancelar reservas;
+- impedir conflitos de horário;
+- adicionar autenticação e associar reservas aos usuários;
+- apresentar indicadores reais no dashboard.
+
+## Licença
+
+Este projeto está disponível sob a licença [MIT](https://opensource.org/licenses/MIT).

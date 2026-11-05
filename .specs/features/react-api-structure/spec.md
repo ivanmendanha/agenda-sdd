@@ -33,7 +33,7 @@ The academic room-booking demo needs a clear split between a Laravel JSON API an
 | Authentication | Never in this project | User 3.B + "projeto não terá autenticação" | y |
 | Example API endpoint | `GET /api/health` returns JSON `{ "status": "ok" }` with HTTP 200 | Proves API wiring without domain logic | y — agent default |
 | SPA shell URL | `GET /` returns Blade that mounts React | Matches current `web.php` root | y — agent default |
-| HTTP client | Thin `fetch` wrapper under `resources/js/services` calling `/api` | No extra dependency; enough for academic demos | y — agent default |
+| HTTP client | Thin typed `fetch` wrapper under `resources/js/services` (`api.ts`) calling `/api` | TypeScript (AD-004); enough for academic demos | y — agent default; superseded JS helper |
 | Mockup for this feature | Non-binding reference; UI deferred | User 2.A | y |
 
 **Open questions:** none - all resolved or logged above.

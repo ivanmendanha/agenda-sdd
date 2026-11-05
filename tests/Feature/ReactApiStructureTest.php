@@ -1,42 +1,31 @@
 <?php
 
-namespace Tests\Feature;
+test('health endpoint returns ok', function () {
+    $response = $this->getJson('/api/health');
 
-use Tests\TestCase;
+    $response->assertOk()
+        ->assertExactJson(['status' => 'ok']);
+});
 
-class ReactApiStructureTest extends TestCase
-{
-    public function test_health_endpoint_returns_ok(): void
-    {
-        $response = $this->getJson('/api/health');
+test('health allows unauthenticated access', function () {
+    $response = $this->getJson('/api/health');
 
-        $response->assertOk()
-            ->assertExactJson(['status' => 'ok']);
-    }
+    $response->assertOk()
+        ->assertJsonPath('status', 'ok');
+});
 
-    public function test_health_allows_unauthenticated_access(): void
-    {
-        $response = $this->getJson('/api/health');
+test('unknown api path returns json', function () {
+    $response = $this->getJson('/api/does-not-exist');
 
-        $response->assertOk()
-            ->assertJsonPath('status', 'ok');
-    }
+    $response->assertNotFound()
+        ->assertHeader('content-type', 'application/json');
+});
 
-    public function test_unknown_api_path_returns_json(): void
-    {
-        $response = $this->getJson('/api/does-not-exist');
+test('root serves react shell', function () {
+    $response = $this->get('/');
 
-        $response->assertNotFound()
-            ->assertHeader('content-type', 'application/json');
-    }
-
-    public function test_root_serves_react_shell(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertOk()
-            ->assertSee('id="app"', false)
-            ->assertSee('type="module"', false)
-            ->assertDontSee("Let's get started");
-    }
-}
+    $response->assertOk()
+        ->assertSee('id="app"', false)
+        ->assertSee('type="module"', false)
+        ->assertDontSee("Let's get started");
+});
