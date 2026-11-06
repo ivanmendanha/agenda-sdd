@@ -239,9 +239,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `room()` is a `BelongsTo`
-- [ ] `date` is cast to a date
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `room()` is a `BelongsTo`
+- [x] `date` is cast to a date
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - entity layer
 **Gate**: build
