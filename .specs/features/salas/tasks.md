@@ -114,8 +114,8 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `opens_at` is `08:00`, `closes_at` is `18:00`, and `max_duration_minutes` is `240`
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `opens_at` is `08:00`, `closes_at` is `18:00`, and `max_duration_minutes` is `240`
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - config layer
 **Gate**: build
