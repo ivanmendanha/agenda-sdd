@@ -281,9 +281,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Default status is `confirmed`, times are zero-padded `H:i` inside 08:00–18:00
-- [ ] `unconfirmed()` sets status to `unconfirmed`
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] Default status is `confirmed`, times are zero-padded `H:i` inside 08:00–18:00
+- [x] `unconfirmed()` sets status to `unconfirmed`
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - factory layer
 **Gate**: build
