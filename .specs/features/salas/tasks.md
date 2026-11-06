@@ -587,11 +587,11 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Heading is `Salas`. Each card matches the capture: name, `Capacidade: N pessoas`, one tag per resource, 3 columns above 768px, 1 column at 768px and below, plus `Ativa` or `Inativa`
-- [ ] Controls are `Capacidade mínima`, `Recurso`, `Filtrar`, `Limpar`, `Consultar disponibilidade`, and `Nova sala`
-- [ ] Empty, no-match, loading, and error copy match the spec, and `Tentar novamente` requests the list again
-- [ ] A 422 from filter or availability clears `Disponível` and `Indisponível` and leaves the previous cards
-- [ ] `npm run typecheck` succeeds
+- [x] Heading is `Salas`. Each card matches the capture: name, `Capacidade: N pessoas`, one tag per resource, 3 columns above 768px, 1 column at 768px and below, plus `Ativa` or `Inativa`
+- [x] Controls are `Capacidade mínima`, `Recurso`, `Filtrar`, `Limpar`, `Consultar disponibilidade`, and `Nova sala`
+- [x] Empty, no-match, loading, and error copy match the spec, and `Tentar novamente` requests the list again
+- [x] A 422 from filter or availability clears `Disponível` and `Indisponível` and leaves the previous cards
+- [x] `npm run typecheck` succeeds
 
 **Tests**: none - screen layer, proved by the walk and `captures/salas-list.running.png`
 **Gate**: build

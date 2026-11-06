@@ -275,16 +275,16 @@ IDs follow story order, then criterion order inside the story.
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| SALA-01 | P1: Room list | Specify | Pending |
-| SALA-02 | P1: Room list | Specify | Pending |
-| SALA-03 | P1: Room list | Specify | Pending |
-| SALA-04 | P1: Room list | Specify | Pending |
+| SALA-01 | P1: Room list | Specify | Implementing |
+| SALA-02 | P1: Room list | Specify | Implementing |
+| SALA-03 | P1: Room list | Specify | Implementing |
+| SALA-04 | P1: Room list | Specify | Implementing |
 | SALA-05 | P1: Room list | Specify | Implementing |
-| SALA-06 | P1: Room list | Specify | Pending |
-| SALA-07 | P1: Room list | Specify | Pending |
+| SALA-06 | P1: Room list | Specify | Implementing |
+| SALA-07 | P1: Room list | Specify | Implementing |
 | SALA-08 | P1: Room list | Specify | Implementing |
-| SALA-09 | P1: Room list | Specify | Pending |
-| SALA-10 | P1: Room list | Specify | Pending |
+| SALA-09 | P1: Room list | Specify | Implementing |
+| SALA-10 | P1: Room list | Specify | Implementing |
 | SALA-11 | P1: Room details | Specify | Implementing |
 | SALA-12 | P1: Room details | Specify | Pending |
 | SALA-13 | P1: Room details | Specify | Pending |
@@ -295,8 +295,8 @@ IDs follow story order, then criterion order inside the story.
 | SALA-18 | P1: Filter rooms | Specify | Implementing |
 | SALA-19 | P1: Filter rooms | Specify | Implementing |
 | SALA-20 | P1: Filter rooms | Specify | Implementing |
-| SALA-21 | P1: Filter rooms | Specify | Pending |
-| SALA-22 | P1: Filter rooms | Specify | Pending |
+| SALA-21 | P1: Filter rooms | Specify | Implementing |
+| SALA-22 | P1: Filter rooms | Specify | Implementing |
 | SALA-23 | P1: Filter rooms | Specify | Implementing |
 | SALA-24 | P1: Filter rooms | Specify | Implementing |
 | SALA-25 | P1: Filter rooms | Specify | Implementing |
