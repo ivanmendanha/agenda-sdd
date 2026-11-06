@@ -260,9 +260,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Default room is active, with a name and a capacity from 1 to 999
-- [ ] `inactive()` sets `active` to false
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] Default room is active, with a name and a capacity from 1 to 999
+- [x] `inactive()` sets `active` to false
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - factory layer
 **Gate**: build
