@@ -317,10 +317,10 @@ IDs follow story order, then criterion order inside the story.
 | SALA-40 | P1: Availability query | Specify | Implementing |
 | SALA-41 | P1: Availability query | Specify | Implementing |
 | SALA-42 | P1: Availability query | Specify | Implementing |
-| SALA-43 | P1: Reservation page | Specify | Pending |
-| SALA-44 | P1: Reservation page | Specify | Pending |
+| SALA-43 | P1: Reservation page | Specify | Implementing |
+| SALA-44 | P1: Reservation page | Specify | Implementing |
 | SALA-45 | P1: Reservation page | Specify | Implementing |
-| SALA-46 | P1: Reservation page | Specify | Pending |
+| SALA-46 | P1: Reservation page | Specify | Implementing |
 | SALA-47 | P1: Reservation page | Specify | Implementing |
 | SALA-48 | P1: Reservation page | Specify | Implementing |
 | SALA-49 | P1: Reservation page | Specify | Implementing |
@@ -332,7 +332,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-55 | P1: Reservation page | Specify | Implementing |
 | SALA-56 | P1: Reservation page | Specify | Implementing |
 | SALA-57 | P1: Reservation page | Specify | Implementing |
-| SALA-58 | P1: Reservation page | Specify | Pending |
+| SALA-58 | P1: Reservation page | Specify | Implementing |
 | SALA-59 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-60 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-61 | P1: Concurrent reservation | Specify | Implementing |

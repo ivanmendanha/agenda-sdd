@@ -654,10 +654,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Fields are `Sala`, `Data`, `Hora Início`, `Hora Fim`, and `Assunto`, with the room from the route selected
-- [ ] HTTP 201 shows `Reserva criada com sucesso!` on this page and does not navigate away
-- [ ] Any other failure shows the server `message`, or `Não foi possível criar a reserva` when the body has none
-- [ ] `npm run typecheck` succeeds
+- [x] Fields are `Sala`, `Data`, `Hora Início`, `Hora Fim`, and `Assunto`, with the room from the route selected
+- [x] HTTP 201 shows `Reserva criada com sucesso!` on this page and does not navigate away
+- [x] Any other failure shows the server `message`, or `Não foi possível criar a reserva` when the body has none
+- [x] `npm run typecheck` succeeds
 
 **Tests**: none - screen layer
 **Gate**: build
