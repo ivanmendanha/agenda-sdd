@@ -610,10 +610,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Active rooms show `Reservar` and `Editar`. Inactive rooms show `Inativa`, `Ativar`, and no `Reservar`
-- [ ] `Inativar` sends the request immediately, with no confirmation dialog
-- [ ] Loading, missing room, and retry copy match the spec
-- [ ] `npm run typecheck` succeeds
+- [x] Active rooms show `Reservar` and `Editar`. Inactive rooms show `Inativa`, `Ativar`, and no `Reservar`
+- [x] `Inativar` sends the request immediately, with no confirmation dialog
+- [x] Loading, missing room, and retry copy match the spec
+- [x] `npm run typecheck` succeeds
 
 **Tests**: none - screen layer
 **Gate**: build

@@ -286,12 +286,12 @@ IDs follow story order, then criterion order inside the story.
 | SALA-09 | P1: Room list | Specify | Implementing |
 | SALA-10 | P1: Room list | Specify | Implementing |
 | SALA-11 | P1: Room details | Specify | Implementing |
-| SALA-12 | P1: Room details | Specify | Pending |
-| SALA-13 | P1: Room details | Specify | Pending |
-| SALA-14 | P1: Room details | Specify | Pending |
+| SALA-12 | P1: Room details | Specify | Implementing |
+| SALA-13 | P1: Room details | Specify | Implementing |
+| SALA-14 | P1: Room details | Specify | Implementing |
 | SALA-15 | P1: Room details | Specify | Implementing |
-| SALA-16 | P1: Room details | Specify | Pending |
-| SALA-17 | P1: Room details | Specify | Pending |
+| SALA-16 | P1: Room details | Specify | Implementing |
+| SALA-17 | P1: Room details | Specify | Implementing |
 | SALA-18 | P1: Filter rooms | Specify | Implementing |
 | SALA-19 | P1: Filter rooms | Specify | Implementing |
 | SALA-20 | P1: Filter rooms | Specify | Implementing |
