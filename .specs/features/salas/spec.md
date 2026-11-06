@@ -321,17 +321,17 @@ IDs follow story order, then criterion order inside the story.
 | SALA-44 | P1: Reservation page | Specify | Pending |
 | SALA-45 | P1: Reservation page | Specify | Implementing |
 | SALA-46 | P1: Reservation page | Specify | Pending |
-| SALA-47 | P1: Reservation page | Specify | Pending |
-| SALA-48 | P1: Reservation page | Specify | Pending |
+| SALA-47 | P1: Reservation page | Specify | Implementing |
+| SALA-48 | P1: Reservation page | Specify | Implementing |
 | SALA-49 | P1: Reservation page | Specify | Implementing |
 | SALA-50 | P1: Reservation page | Specify | Implementing |
-| SALA-51 | P1: Reservation page | Specify | Pending |
-| SALA-52 | P1: Reservation page | Specify | Pending |
-| SALA-53 | P1: Reservation page | Specify | Pending |
-| SALA-54 | P1: Reservation page | Specify | Pending |
-| SALA-55 | P1: Reservation page | Specify | Pending |
+| SALA-51 | P1: Reservation page | Specify | Implementing |
+| SALA-52 | P1: Reservation page | Specify | Implementing |
+| SALA-53 | P1: Reservation page | Specify | Implementing |
+| SALA-54 | P1: Reservation page | Specify | Implementing |
+| SALA-55 | P1: Reservation page | Specify | Implementing |
 | SALA-56 | P1: Reservation page | Specify | Implementing |
-| SALA-57 | P1: Reservation page | Specify | Pending |
+| SALA-57 | P1: Reservation page | Specify | Implementing |
 | SALA-58 | P1: Reservation page | Specify | Pending |
 | SALA-59 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-60 | P1: Concurrent reservation | Specify | Implementing |
@@ -353,8 +353,8 @@ IDs follow story order, then criterion order inside the story.
 | SALA-76 | P1: Activate and inactivate | Specify | Implementing |
 | SALA-77 | P1: Activate and inactivate | Specify | Implementing |
 | SALA-78 | P1: Activate and inactivate | Specify | Implementing |
-| SALA-79 | P1: Activate and inactivate | Specify | Pending |
-| SALA-80 | P1: Public access | Specify | Pending |
+| SALA-79 | P1: Activate and inactivate | Specify | Implementing |
+| SALA-80 | P1: Public access | Specify | Implementing |
 
 **ID format:** `SALA-[NUMBER]`
 

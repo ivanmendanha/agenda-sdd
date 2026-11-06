@@ -543,10 +543,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Success is HTTP 201. Conflict is HTTP 409 `Conflito de horário`. Inactive room and bad input are HTTP 422. Unknown room is HTTP 404. No credentials are required
-- [ ] `tests/Feature/Salas/ReservationApiTest.php` passes: `it stores one confirmed reservation`, `it rejects an empty subject`, `it rejects a subject longer than 200 characters`, `it rejects a reservation for an inactive room`, `it rejects an overlapping reservation`, `it rejects a reservation whose end is not after its start`, `it rejects a reservation before today`, `it rejects a reservation outside business hours`, `it rejects a reservation over 4 hours`, `it uses the first failing check on create`, `it rechecks the conflict at create time`, `it confirms exactly one of two concurrent creates`, `it stores two reservations that only touch`, `it ignores an unconfirmed reservation`, `it serves salas actions with no credentials`
-- [ ] Test count: 15 new tests pass
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] Success is HTTP 201. Conflict is HTTP 409 `Conflito de horário`. Inactive room and bad input are HTTP 422. Unknown room is HTTP 404. No credentials are required
+- [x] `tests/Feature/Salas/ReservationApiTest.php` passes: `it stores one confirmed reservation`, `it rejects an empty subject`, `it rejects a subject longer than 200 characters`, `it rejects a reservation for an inactive room`, `it rejects an overlapping reservation`, `it rejects a reservation whose end is not after its start`, `it rejects a reservation before today`, `it rejects a reservation outside business hours`, `it rejects a reservation over 4 hours`, `it uses the first failing check on create`, `it rechecks the conflict at create time`, `it confirms exactly one of two concurrent creates`, `it stores two reservations that only touch`, `it ignores an unconfirmed reservation`, `it serves salas actions with no credentials`
+- [x] Test count: 15 new tests pass
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full
@@ -692,7 +692,7 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Build**: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
-**Run salas**: `php artisan test tests/Feature/Salas --testdox`
+**Run salas**: `vendor/bin/pest tests/Feature/Salas --testdox --colors=never > /tmp/salas-testdox.txt; vendor/bin/pest tests/Feature/Salas --colors=never; status=$?; cat /tmp/salas-testdox.txt; exit $status`
 
 **C1** - Room cards match `captures/salas-list.html`: name, `Capacidade: N pessoas`, one tag per resource, 3 columns above 768px, 1 column at 768px and below (SALA-01, AC 1)
 Proof: browser captures/salas-list.running.png
@@ -707,7 +707,7 @@ Proof: walk - on `/salas`, an active room card shows `Ativa`
 Proof: walk - on `/salas`, an inactive room card shows `Inativa`
 
 **C5** - The list includes every stored room (SALA-05, AC 5)
-Proof: run salas | ✓ it lists rooms over HTTP
+Proof: run salas | it lists rooms over HTTP
 
 **C6** - An empty catalog shows `Nenhuma sala cadastrada` (SALA-06, AC 6)
 Proof: walk - with no rooms, `/salas` shows `Nenhuma sala cadastrada`
@@ -725,7 +725,7 @@ Proof: walk - use `Tentar novamente` and see a new `GET /api/rooms`
 Proof: walk - with more cards than the viewport, scroll `/salas` and each card stays intact
 
 **C11** - Opening a card shows name, capacity, resources, and `Ativa` or `Inativa` (SALA-11, AC 1)
-Proof: run salas | ✓ it shows one room
+Proof: run salas | it shows one room
 
 **C12** - An active room shows `Reservar` and `Editar` (SALA-12, AC 2)
 Proof: walk - open an active room and see `Reservar` and `Editar`
@@ -737,7 +737,7 @@ Proof: walk - open an inactive room, see `Inativa`, and see no `Reservar`
 Proof: walk - slow the detail request and see `Carregando sala...`
 
 **C15** - An unknown room shows `Sala não encontrada` (SALA-15, AC 5)
-Proof: run salas | ✓ it returns 404 when the room does not exist
+Proof: run salas | it returns 404 when the room does not exist
 
 **C16** - A failed detail shows `Não foi possível carregar a sala` and `Tentar novamente` (SALA-16, AC 6)
 Proof: walk - fail the detail request and see that sentence and `Tentar novamente`
@@ -746,13 +746,13 @@ Proof: walk - fail the detail request and see that sentence and `Tentar novament
 Proof: walk - use `Tentar novamente` on the detail error and see a new detail request
 
 **C18** - Minimum capacity keeps rooms with capacity greater than or equal to it (SALA-18, AC 1)
-Proof: run salas | ✓ it filters rooms by minimum capacity
+Proof: run salas | it filters rooms by minimum capacity
 
 **C19** - Resource filter matches a tag after trim, ignoring case (SALA-19, AC 2)
-Proof: run salas | ✓ it filters rooms by resource ignoring case
+Proof: run salas | it filters rooms by resource ignoring case
 
 **C20** - Both filters apply together (SALA-20, AC 3)
-Proof: run salas | ✓ it applies capacity and resource together
+Proof: run salas | it applies capacity and resource together
 
 **C21** - No match shows `Nenhuma sala encontrada` (SALA-21, AC 4)
 Proof: walk - filter to a capacity and resource that match nothing and see `Nenhuma sala encontrada`
@@ -761,64 +761,64 @@ Proof: walk - filter to a capacity and resource that match nothing and see `Nenh
 Proof: walk - use `Limpar` and see every room with empty filter fields
 
 **C23** - Blank filters list every room (SALA-23, AC 6)
-Proof: run salas | ✓ it returns every room when filters are blank
+Proof: run salas | it returns every room when filters are blank
 
 **C24** - There is no name search and no location filter (SALA-24, AC 7)
 Proof: walk - the Salas list has no name field and no location field
 
 **C25** - An invalid minimum capacity shows `A capacidade deve ser um número inteiro de 1 a 999` and keeps the previous list (SALA-25, AC 8)
-Proof: run salas | ✓ it rejects an invalid minimum capacity
+Proof: run salas | it rejects an invalid minimum capacity
 
 **C26** - A valid interval shows `Disponível` or `Indisponível` on every active room (SALA-26, AC 1)
-Proof: run salas | ✓ it marks a free active room disponivel
+Proof: run salas | it marks a free active room disponivel
 
 **C27** - Overlap is start before the confirmed end and end after the confirmed start, same room and date (SALA-27, AC 2)
-Proof: run salas | ✓ it marks an overlapping active room indisponivel
+Proof: run salas | it marks an overlapping active room indisponivel
 
 **C28** - An overlapping confirmed reservation shows `Indisponível` (SALA-28, AC 3)
-Proof: run salas | ✓ it marks an overlapping active room indisponivel
+Proof: run salas | it marks an overlapping active room indisponivel
 
 **C29** - An active room with no overlap shows `Disponível` (SALA-29, AC 4)
-Proof: run salas | ✓ it marks a free active room disponivel
+Proof: run salas | it marks a free active room disponivel
 
 **C30** - An inactive room keeps `Inativa` and does not show `Disponível` or `Indisponível` (SALA-30, AC 5)
-Proof: run salas | ✓ it leaves an inactive room without availability
+Proof: run salas | it leaves an inactive room without availability
 
 **C31** - A reservation that only touches the query shows `Disponível` (SALA-31, AC 6)
-Proof: run salas | ✓ it treats a touching reservation as free
+Proof: run salas | it treats a touching reservation as free
 
 **C32** - Another room's reservation does not block this room (SALA-32, AC 7)
-Proof: run salas | ✓ it ignores a reservation on another room
+Proof: run salas | it ignores a reservation on another room
 
 **C33** - Another date's reservation does not block this date (SALA-33, AC 8)
-Proof: run salas | ✓ it ignores a reservation on another date
+Proof: run salas | it ignores a reservation on another date
 
 **C34** - A query outside 08:00–18:00 shows `Reservas permitidas apenas entre 8h e 18h` and no availability marks (SALA-34, AC 9)
-Proof: run salas | ✓ it rejects an availability query outside business hours
+Proof: run salas | it rejects an availability query outside business hours
 
 **C35** - A query over 4 hours shows `Duração máxima permitida é de 4 horas` and no availability marks (SALA-35, AC 10)
-Proof: run salas | ✓ it rejects an availability query over 4 hours
+Proof: run salas | it rejects an availability query over 4 hours
 
 **C36** - A query whose end is not after its start shows `Horário de fim deve ser posterior ao horário de início` and no availability marks (SALA-36, AC 11)
-Proof: run salas | ✓ it rejects an availability query whose end is not after its start
+Proof: run salas | it rejects an availability query whose end is not after its start
 
 **C37** - A query before today shows `A data não pode ser anterior a hoje` and no availability marks (SALA-37, AC 12)
-Proof: run salas | ✓ it rejects an availability query before today
+Proof: run salas | it rejects an availability query before today
 
 **C38** - Only the first failing interval check is reported, in the spec order (SALA-38, AC 13)
-Proof: run salas | ✓ it reports only the first failing availability check
+Proof: run salas | it reports only the first failing availability check
 
 **C39** - A duration of exactly 4 hours is accepted (SALA-39, AC 14)
-Proof: run salas | ✓ it accepts a duration of exactly 4 hours
+Proof: run salas | it accepts a duration of exactly 4 hours
 
 **C40** - A start time of 08:00 is accepted (SALA-40, AC 15)
-Proof: run salas | ✓ it accepts a start of 08:00
+Proof: run salas | it accepts a start of 08:00
 
 **C41** - An end time of 18:00 is accepted (SALA-41, AC 16)
-Proof: run salas | ✓ it accepts an end of 18:00
+Proof: run salas | it accepts an end of 18:00
 
 **C42** - Create uses the same 08:00–18:00 window and 4-hour maximum (SALA-42, AC 17)
-Proof: run salas | ✓ it rejects a reservation outside business hours
+Proof: run salas | it rejects a reservation outside business hours
 
 **C43** - `Reservar` on an active room opens the reservation page with that room selected (SALA-43, AC 1)
 Proof: walk - use `Reservar` on an active room and land on its reservation page with that room selected
@@ -827,55 +827,55 @@ Proof: walk - use `Reservar` on an active room and land on its reservation page 
 Proof: walk - the reservation page shows those five labels
 
 **C45** - A valid reservation returns HTTP 201 and stores one confirmed row (SALA-45, AC 3)
-Proof: run salas | ✓ it stores one confirmed reservation
+Proof: run salas | it stores one confirmed reservation
 
 **C46** - Success shows `Reserva criada com sucesso!` and stays on the reservation page (SALA-46, AC 4)
 Proof: walk - after a successful reserve, that sentence is on the same reservation page
 
 **C47** - An empty subject returns HTTP 422 `Informe o assunto` and stores nothing (SALA-47, AC 5)
-Proof: run salas | ✓ it rejects an empty subject
+Proof: run salas | it rejects an empty subject
 
 **C48** - A subject over 200 characters returns HTTP 422 `O assunto deve ter no máximo 200 caracteres` and stores nothing (SALA-48, AC 6)
-Proof: run salas | ✓ it rejects a subject longer than 200 characters
+Proof: run salas | it rejects a subject longer than 200 characters
 
 **C49** - An inactive room returns HTTP 422 `Sala inativa não permite nova reserva` and stores nothing (SALA-49, AC 7)
-Proof: run salas | ✓ it rejects a reservation for an inactive room
+Proof: run salas | it rejects a reservation for an inactive room
 
 **C50** - An overlap returns HTTP 409 `Conflito de horário` and stores nothing (SALA-50, AC 8)
-Proof: run salas | ✓ it rejects an overlapping reservation
+Proof: run salas | it rejects an overlapping reservation
 
 **C51** - Create with end not after start returns HTTP 422 `Horário de fim deve ser posterior ao horário de início` and stores nothing (SALA-51, AC 9)
-Proof: run salas | ✓ it rejects a reservation whose end is not after its start
+Proof: run salas | it rejects a reservation whose end is not after its start
 
 **C52** - Create before today returns HTTP 422 `A data não pode ser anterior a hoje` and stores nothing (SALA-52, AC 10)
-Proof: run salas | ✓ it rejects a reservation before today
+Proof: run salas | it rejects a reservation before today
 
 **C53** - Create outside business hours returns HTTP 422 `Reservas permitidas apenas entre 8h e 18h` and stores nothing (SALA-53, AC 11)
-Proof: run salas | ✓ it rejects a reservation outside business hours
+Proof: run salas | it rejects a reservation outside business hours
 
 **C54** - Create over 4 hours returns HTTP 422 `Duração máxima permitida é de 4 horas` and stores nothing (SALA-54, AC 12)
-Proof: run salas | ✓ it rejects a reservation over 4 hours
+Proof: run salas | it rejects a reservation over 4 hours
 
 **C55** - Create uses the same first-failure order as the availability query (SALA-55, AC 13)
-Proof: run salas | ✓ it uses the first failing check on create
+Proof: run salas | it uses the first failing check on create
 
 **C56** - An unknown room on create returns HTTP 404 `Sala não encontrada` and stores nothing (SALA-56, AC 14)
-Proof: run salas | ✓ it returns 404 when the room does not exist
+Proof: run salas | it returns 404 when the room does not exist
 
 **C57** - Create checks the conflict again after a query that showed `Disponível` (SALA-57, AC 15)
-Proof: run salas | ✓ it rechecks the conflict at create time
+Proof: run salas | it rechecks the conflict at create time
 
 **C58** - A non-validation create failure shows `Não foi possível criar a reserva` and stores nothing (SALA-58, AC 16)
 Proof: walk - force a server failure on create and see `Não foi possível criar a reserva` with no new row
 
 **C59** - Two concurrent overlapping creates leave one HTTP 201, one HTTP 409 `Conflito de horário`, and one confirmed row (SALA-59, AC 1)
-Proof: run salas | ✓ it confirms exactly one of two concurrent creates
+Proof: run salas | it confirms exactly one of two concurrent creates
 
 **C60** - Two creates that only touch both return HTTP 201 and store two confirmed rows (SALA-60, AC 2)
-Proof: run salas | ✓ it stores two reservations that only touch
+Proof: run salas | it stores two reservations that only touch
 
 **C61** - An unconfirmed overlap does not reject the create and does not show `Indisponível` (SALA-61, AC 3)
-Proof: run salas | ✓ it ignores an unconfirmed reservation
+Proof: run salas | it ignores an unconfirmed reservation
 
 **C62** - `Nova sala` shows the room form (SALA-62, AC 1)
 Proof: walk - use `Nova sala` and see the room form
@@ -887,59 +887,59 @@ Proof: walk - the create form shows those fields and `Ativa` is selected
 Proof: walk - use `Editar` and see the current name, capacity, resources, and active flag
 
 **C65** - A valid create returns HTTP 201, stores the room, and shows its details (SALA-65, AC 4)
-Proof: run salas | ✓ it creates a room
+Proof: run salas | it creates a room
 
 **C66** - An empty name returns HTTP 422 `Informe o nome da sala` and stores nothing (SALA-66, AC 5)
-Proof: run salas | ✓ it rejects an empty room name
+Proof: run salas | it rejects an empty room name
 
 **C67** - A name over 100 characters returns HTTP 422 `O nome da sala deve ter no máximo 100 caracteres` and stores nothing (SALA-67, AC 6)
-Proof: run salas | ✓ it rejects a room name over 100 characters
+Proof: run salas | it rejects a room name over 100 characters
 
 **C68** - A bad capacity returns HTTP 422 `A capacidade deve ser um número inteiro de 1 a 999` and stores nothing (SALA-68, AC 7)
-Proof: run salas | ✓ it rejects a capacity outside 1 to 999
+Proof: run salas | it rejects a capacity outside 1 to 999
 
 **C69** - Omitted resources store an empty list (SALA-69, AC 8)
-Proof: run salas | ✓ it stores a room without resources
+Proof: run salas | it stores a room without resources
 
 **C70** - A repeated resource is stored once, keeping the first spelling (SALA-70, AC 9)
-Proof: run salas | ✓ it stores one tag for a repeated resource
+Proof: run salas | it stores one tag for a repeated resource
 
 **C71** - Two rooms may share a name (SALA-71, AC 10)
-Proof: run salas | ✓ it allows two rooms to share a name
+Proof: run salas | it allows two rooms to share a name
 
 **C72** - A valid edit returns HTTP 200 and shows the updated details (SALA-72, AC 11)
-Proof: run salas | ✓ it updates a room
+Proof: run salas | it updates a room
 
 **C73** - A non-validation save failure shows `Não foi possível salvar a sala` and does not claim success (SALA-73, AC 12)
 Proof: walk - fail a save and see `Não foi possível salvar a sala`
 
 **C74** - There is no control that deletes a room (SALA-74, AC 13)
-Proof: run salas | ✓ it does not expose a room delete route
+Proof: run salas | it does not expose a room delete route
 
 **C75** - `Inativar` marks the room inactive, shows `Inativa`, and does not ask for confirmation (SALA-75, AC 1)
-Proof: run salas | ✓ it inactivates a room
+Proof: run salas | it inactivates a room
 
 **C76** - `Ativar` marks the room active and shows `Ativa` (SALA-76, AC 2)
-Proof: run salas | ✓ it activates a room
+Proof: run salas | it activates a room
 
 **C77** - Inactivating a room keeps its confirmed reservations (SALA-77, AC 3)
-Proof: run salas | ✓ it keeps confirmed reservations when a room is inactivated
+Proof: run salas | it keeps confirmed reservations when a room is inactivated
 
 **C78** - Inactivating a room does not remove the room row (SALA-78, AC 4)
-Proof: run salas | ✓ it keeps the room row when a room is inactivated
+Proof: run salas | it keeps the room row when a room is inactivated
 
 **C79** - A new reservation for a room just inactivated returns HTTP 422 `Sala inativa não permite nova reserva` and stores nothing (SALA-79, AC 5)
-Proof: run salas | ✓ it rejects a reservation for an inactive room
+Proof: run salas | it rejects a reservation for an inactive room
 
 **C80** - List, show, create, update, activate, inactivate, availability, and reservation create work with no credentials (SALA-80, AC 1)
-Proof: run salas | ✓ it serves salas actions with no credentials
+Proof: run salas | it serves salas actions with no credentials
 
 ---
 
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) — sent, not yet returned
+**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) returned @ a5dd25f; batch worker phases 5–6 (T22–T28) — sent, not yet returned
 **Walked:** none
 
 ---
