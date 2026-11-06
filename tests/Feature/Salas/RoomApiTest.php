@@ -440,3 +440,15 @@ it('updates a room', function () {
         'name_normalized' => 'projetor',
     ]);
 });
+
+it('activates a room', function () {
+    $room = Room::factory()->inactive()->create();
+
+    $response = $this->postJson("/api/rooms/{$room->id}/activate");
+
+    $response->assertOk()
+        ->assertJsonPath('data.id', $room->id)
+        ->assertJsonPath('data.active', true);
+
+    $this->assertDatabaseHas('rooms', ['id' => $room->id, 'active' => true]);
+});
