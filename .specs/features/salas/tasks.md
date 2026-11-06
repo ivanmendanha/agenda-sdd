@@ -565,9 +565,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Failed responses throw `ApiError` whose message is the JSON `message`
-- [ ] `npm run typecheck` succeeds
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] Failed responses throw `ApiError` whose message is the JSON `message`
+- [x] `npm run typecheck` succeeds
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - React client, no component runner
 **Gate**: build
