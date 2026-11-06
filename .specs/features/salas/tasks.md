@@ -369,8 +369,8 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Payload includes `id`, `name`, `capacity`, `resources` as strings, `active`, and `availability` null unless the query set it
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] Payload includes `id`, `name`, `capacity`, `resources` as strings, `active`, and `availability` null unless the query set it
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full

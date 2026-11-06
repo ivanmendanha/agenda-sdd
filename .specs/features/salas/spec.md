@@ -285,7 +285,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-08 | P1: Room list | Specify | Pending |
 | SALA-09 | P1: Room list | Specify | Pending |
 | SALA-10 | P1: Room list | Specify | Pending |
-| SALA-11 | P1: Room details | Specify | Pending |
+| SALA-11 | P1: Room details | Specify | Implementing |
 | SALA-12 | P1: Room details | Specify | Pending |
 | SALA-13 | P1: Room details | Specify | Pending |
 | SALA-14 | P1: Room details | Specify | Pending |
