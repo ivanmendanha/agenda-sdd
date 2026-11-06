@@ -9,7 +9,8 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: `.specs/features/salas/design.md`
-**Status**: Draft
+**Status**: Approved
+**Approved**: 2026-11-06 - user: "Aprovado"
 **Build**: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 ---
@@ -92,9 +93,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `transaction_mode` is `IMMEDIATE`
-- [ ] `busy_timeout` is `5000`
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `transaction_mode` is `IMMEDIATE`
+- [x] `busy_timeout` is `5000`
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - config layer
 **Gate**: build
@@ -938,7 +939,7 @@ Proof: run salas | ✓ it serves salas actions with no credentials
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** none
+**Dispatched:** batch worker phases 1–2 (T1–T10) — sent, not yet returned
 **Walked:** none
 
 ---
