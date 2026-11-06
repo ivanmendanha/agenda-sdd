@@ -632,10 +632,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Create opens from `Nova sala` with `Ativa` selected
-- [ ] Edit opens filled with the current name, capacity, resources, and active flag
-- [ ] The page shows the server `message`, and a non-validation failure shows `Não foi possível salvar a sala`
-- [ ] `npm run typecheck` succeeds
+- [x] Create opens from `Nova sala` with `Ativa` selected
+- [x] Edit opens filled with the current name, capacity, resources, and active flag
+- [x] The page shows the server `message`, and a non-validation failure shows `Não foi possível salvar a sala`
+- [x] `npm run typecheck` succeeds
 
 **Tests**: none - screen layer
 **Gate**: build

@@ -336,9 +336,9 @@ IDs follow story order, then criterion order inside the story.
 | SALA-59 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-60 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-61 | P1: Concurrent reservation | Specify | Implementing |
-| SALA-62 | P1: Register and edit rooms | Specify | Pending |
-| SALA-63 | P1: Register and edit rooms | Specify | Pending |
-| SALA-64 | P1: Register and edit rooms | Specify | Pending |
+| SALA-62 | P1: Register and edit rooms | Specify | Implementing |
+| SALA-63 | P1: Register and edit rooms | Specify | Implementing |
+| SALA-64 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-65 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-66 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-67 | P1: Register and edit rooms | Specify | Implementing |
