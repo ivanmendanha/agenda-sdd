@@ -408,3 +408,35 @@ it('returns 404 when the room does not exist', function () {
     $response->assertNotFound()
         ->assertExactJson(['message' => 'Sala não encontrada']);
 });
+
+it('updates a room', function () {
+    $room = Room::factory()->create(['name' => 'Sala Alfa', 'capacity' => 10]);
+    $room->resources()->create(['name' => 'Quadro', 'name_normalized' => 'quadro']);
+
+    $response = $this->putJson("/api/rooms/{$room->id}", [
+        'name' => 'Sala Beta',
+        'capacity' => 30,
+        'resources' => ['Projetor', 'PROJETOR'],
+        'active' => false,
+    ]);
+
+    $response->assertOk()
+        ->assertJsonPath('data.id', $room->id)
+        ->assertJsonPath('data.name', 'Sala Beta')
+        ->assertJsonPath('data.capacity', 30)
+        ->assertJsonPath('data.resources', ['Projetor'])
+        ->assertJsonPath('data.active', false);
+
+    $this->assertDatabaseHas('rooms', [
+        'id' => $room->id,
+        'name' => 'Sala Beta',
+        'capacity' => 30,
+        'active' => false,
+    ]);
+    $this->assertDatabaseCount('room_resources', 1);
+    $this->assertDatabaseHas('room_resources', [
+        'room_id' => $room->id,
+        'name' => 'Projetor',
+        'name_normalized' => 'projetor',
+    ]);
+});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use App\Reservations\IntervalValidator;
@@ -73,6 +74,24 @@ class RoomController extends Controller
      */
     public function show(Room $room): RoomResource
     {
+        return RoomResource::make($room->load('resources'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateRoomRequest $request, Room $room): RoomResource
+    {
+        $data = $request->validated();
+
+        $room->update([
+            'name' => $data['name'],
+            'capacity' => $data['capacity'],
+            'active' => $data['active'] ?? $room->active,
+        ]);
+
+        $this->syncResources($room, $data['resources'] ?? []);
+
         return RoomResource::make($room->load('resources'));
     }
 

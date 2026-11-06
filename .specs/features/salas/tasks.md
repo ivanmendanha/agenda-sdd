@@ -477,10 +477,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] HTTP 200 persists name, capacity, resources, and active, and returns the room
-- [ ] `RoomApiTest.php` passes `it updates a room`
-- [ ] Test count: 1 new test passes
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] HTTP 200 persists name, capacity, resources, and active, and returns the room
+- [x] `RoomApiTest.php` passes `it updates a room`
+- [x] Test count: 1 new test passes
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full
