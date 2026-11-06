@@ -324,11 +324,11 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] The write rolls back on conflict and on an inactive room, and stores nothing partial
-- [ ] `tests/Feature/Salas/CreateReservationTest.php` passes these tests: `action stores one confirmed reservation`, `action refuses an inactive room`, `action refuses an overlapping confirmed reservation`, `action allows a touching reservation`, `action ignores an unconfirmed reservation`, `action confirms exactly one concurrent overlap`
-- [ ] The concurrent test uses two PHP processes and one sqlite file, not two sequential calls in one process
-- [ ] Test count: 6 tests pass
-- [ ] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
+- [x] The write rolls back on conflict and on an inactive room, and stores nothing partial
+- [x] `tests/Feature/Salas/CreateReservationTest.php` passes these tests: `action stores one confirmed reservation`, `action refuses an inactive room`, `action refuses an overlapping confirmed reservation`, `action allows a touching reservation`, `action ignores an unconfirmed reservation`, `action confirms exactly one concurrent overlap`
+- [x] The concurrent test uses two PHP processes and one sqlite file, not two sequential calls in one process
+- [x] Test count: 6 tests pass
+- [x] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: quick

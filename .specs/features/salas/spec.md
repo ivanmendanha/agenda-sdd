@@ -323,8 +323,8 @@ IDs follow story order, then criterion order inside the story.
 | SALA-46 | P1: Reservation page | Specify | Pending |
 | SALA-47 | P1: Reservation page | Specify | Pending |
 | SALA-48 | P1: Reservation page | Specify | Pending |
-| SALA-49 | P1: Reservation page | Specify | Pending |
-| SALA-50 | P1: Reservation page | Specify | Pending |
+| SALA-49 | P1: Reservation page | Specify | Implementing |
+| SALA-50 | P1: Reservation page | Specify | Implementing |
 | SALA-51 | P1: Reservation page | Specify | Pending |
 | SALA-52 | P1: Reservation page | Specify | Pending |
 | SALA-53 | P1: Reservation page | Specify | Pending |
@@ -334,7 +334,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-57 | P1: Reservation page | Specify | Pending |
 | SALA-58 | P1: Reservation page | Specify | Pending |
 | SALA-59 | P1: Concurrent reservation | Specify | Implementing |
-| SALA-60 | P1: Concurrent reservation | Specify | Pending |
+| SALA-60 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-61 | P1: Concurrent reservation | Specify | Implementing |
 | SALA-62 | P1: Register and edit rooms | Specify | Pending |
 | SALA-63 | P1: Register and edit rooms | Specify | Pending |
