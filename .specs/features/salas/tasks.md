@@ -302,10 +302,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `firstFailure` returns the spec sentence for the first failure only, in the spec order, or null
-- [ ] `tests/Feature/Salas/IntervalValidatorTest.php` uses `RefreshDatabase` only if it touches the database, and these tests pass: `validator rejects an end that is not after the start`, `validator rejects a date before today`, `validator rejects an interval outside business hours`, `validator rejects a duration over 4 hours`, `validator reports only the first failing check`, `validator accepts a duration of exactly 4 hours`, `validator accepts a start of 08:00`, `validator accepts an end of 18:00`
-- [ ] Test count: 8 tests pass
-- [ ] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
+- [x] `firstFailure` returns the spec sentence for the first failure only, in the spec order, or null
+- [x] `tests/Feature/Salas/IntervalValidatorTest.php` uses `RefreshDatabase` only if it touches the database, and these tests pass: `validator rejects an end that is not after the start`, `validator rejects a date before today`, `validator rejects an interval outside business hours`, `validator rejects a duration over 4 hours`, `validator reports only the first failing check`, `validator accepts a duration of exactly 4 hours`, `validator accepts a start of 08:00`, `validator accepts an end of 18:00`
+- [x] Test count: 8 tests pass
+- [x] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: quick
@@ -939,7 +939,7 @@ Proof: run salas | ✓ it serves salas actions with no credentials
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker phases 1–2 (T1–T10) — sent, not yet returned
+**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) — sent, not yet returned
 **Walked:** none
 
 ---
