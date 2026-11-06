@@ -389,10 +389,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] HTTP 201 returns the room resource. Invalid name or capacity returns HTTP 422 with the spec sentence and writes no row
-- [ ] `tests/Feature/Salas/RoomApiTest.php` passes these tests: `it creates a room`, `it rejects an empty room name`, `it rejects a room name over 100 characters`, `it rejects a capacity outside 1 to 999`, `it stores a room without resources`, `it stores one tag for a repeated resource`, `it allows two rooms to share a name`, `it does not expose a room delete route`
-- [ ] Test count: 8 tests pass in this file, plus the earlier Salas tests
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] HTTP 201 returns the room resource. Invalid name or capacity returns HTTP 422 with the spec sentence and writes no row
+- [x] `tests/Feature/Salas/RoomApiTest.php` passes these tests: `it creates a room`, `it rejects an empty room name`, `it rejects a room name over 100 characters`, `it rejects a capacity outside 1 to 999`, `it stores a room without resources`, `it stores one tag for a repeated resource`, `it allows two rooms to share a name`, `it does not expose a room delete route`
+- [x] Test count: 8 tests pass in this file, plus the earlier Salas tests
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full

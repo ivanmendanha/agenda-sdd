@@ -340,15 +340,15 @@ IDs follow story order, then criterion order inside the story.
 | SALA-63 | P1: Register and edit rooms | Specify | Pending |
 | SALA-64 | P1: Register and edit rooms | Specify | Pending |
 | SALA-65 | P1: Register and edit rooms | Specify | Implementing |
-| SALA-66 | P1: Register and edit rooms | Specify | Pending |
-| SALA-67 | P1: Register and edit rooms | Specify | Pending |
-| SALA-68 | P1: Register and edit rooms | Specify | Pending |
-| SALA-69 | P1: Register and edit rooms | Specify | Pending |
+| SALA-66 | P1: Register and edit rooms | Specify | Implementing |
+| SALA-67 | P1: Register and edit rooms | Specify | Implementing |
+| SALA-68 | P1: Register and edit rooms | Specify | Implementing |
+| SALA-69 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-70 | P1: Register and edit rooms | Specify | Implementing |
-| SALA-71 | P1: Register and edit rooms | Specify | Pending |
+| SALA-71 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-72 | P1: Register and edit rooms | Specify | Pending |
 | SALA-73 | P1: Register and edit rooms | Specify | Pending |
-| SALA-74 | P1: Register and edit rooms | Specify | Pending |
+| SALA-74 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-75 | P1: Activate and inactivate | Specify | Pending |
 | SALA-76 | P1: Activate and inactivate | Specify | Pending |
 | SALA-77 | P1: Activate and inactivate | Specify | Pending |
