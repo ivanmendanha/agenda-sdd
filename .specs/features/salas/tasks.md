@@ -411,10 +411,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] A failed interval returns the spec sentence and does not include `disponivel` or `indisponivel`
-- [ ] `RoomApiTest.php` also passes: `it lists rooms over HTTP`, `it filters rooms by minimum capacity`, `it filters rooms by resource ignoring case`, `it applies capacity and resource together`, `it returns every room when filters are blank`, `it rejects an invalid minimum capacity`, `it marks an overlapping active room indisponivel`, `it marks a free active room disponivel`, `it leaves an inactive room without availability`, `it treats a touching reservation as free`, `it ignores a reservation on another room`, `it ignores a reservation on another date`, `it rejects an availability query outside business hours`, `it rejects an availability query over 4 hours`, `it rejects an availability query whose end is not after its start`, `it rejects an availability query before today`, `it reports only the first failing availability check`, `it accepts a duration of exactly 4 hours`, `it accepts a start of 08:00`, `it accepts an end of 18:00`
-- [ ] Test count: 20 new tests pass
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] A failed interval returns the spec sentence and does not include `disponivel` or `indisponivel`
+- [x] `RoomApiTest.php` also passes: `it lists rooms over HTTP`, `it filters rooms by minimum capacity`, `it filters rooms by resource ignoring case`, `it applies capacity and resource together`, `it returns every room when filters are blank`, `it rejects an invalid minimum capacity`, `it marks an overlapping active room indisponivel`, `it marks a free active room disponivel`, `it leaves an inactive room without availability`, `it treats a touching reservation as free`, `it ignores a reservation on another room`, `it ignores a reservation on another date`, `it rejects an availability query outside business hours`, `it rejects an availability query over 4 hours`, `it rejects an availability query whose end is not after its start`, `it rejects an availability query before today`, `it reports only the first failing availability check`, `it accepts a duration of exactly 4 hours`, `it accepts a start of 08:00`, `it accepts an end of 18:00`
+- [x] Test count: 20 new tests pass
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full

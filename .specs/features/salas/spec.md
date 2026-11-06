@@ -298,8 +298,8 @@ IDs follow story order, then criterion order inside the story.
 | SALA-21 | P1: Filter rooms | Specify | Pending |
 | SALA-22 | P1: Filter rooms | Specify | Pending |
 | SALA-23 | P1: Filter rooms | Specify | Implementing |
-| SALA-24 | P1: Filter rooms | Specify | Pending |
-| SALA-25 | P1: Filter rooms | Specify | Pending |
+| SALA-24 | P1: Filter rooms | Specify | Implementing |
+| SALA-25 | P1: Filter rooms | Specify | Implementing |
 | SALA-26 | P1: Availability query | Specify | Implementing |
 | SALA-27 | P1: Availability query | Specify | Pending |
 | SALA-28 | P1: Availability query | Specify | Implementing |
@@ -308,8 +308,8 @@ IDs follow story order, then criterion order inside the story.
 | SALA-31 | P1: Availability query | Specify | Implementing |
 | SALA-32 | P1: Availability query | Specify | Implementing |
 | SALA-33 | P1: Availability query | Specify | Implementing |
-| SALA-34 | P1: Availability query | Specify | Pending |
-| SALA-35 | P1: Availability query | Specify | Pending |
+| SALA-34 | P1: Availability query | Specify | Implementing |
+| SALA-35 | P1: Availability query | Specify | Implementing |
 | SALA-36 | P1: Availability query | Specify | Implementing |
 | SALA-37 | P1: Availability query | Specify | Implementing |
 | SALA-38 | P1: Availability query | Specify | Implementing |

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -107,4 +108,281 @@ it('does not expose a room delete route', function () {
 
     expect($response->status())->toBeIn([404, 405]);
     $this->assertModelExists($room);
+});
+
+it('lists rooms over HTTP', function () {
+    $active = Room::factory()->create(['name' => 'Sala Ativa', 'capacity' => 12]);
+    $active->resources()->create(['name' => 'Projetor', 'name_normalized' => 'projetor']);
+    $inactive = Room::factory()->inactive()->create(['name' => 'Sala Inativa']);
+
+    $response = $this->getJson('/api/rooms');
+
+    $response->assertOk()
+        ->assertJsonCount(2, 'data')
+        ->assertJsonPath('data.0.id', $active->id)
+        ->assertJsonPath('data.0.name', 'Sala Ativa')
+        ->assertJsonPath('data.0.capacity', 12)
+        ->assertJsonPath('data.0.resources', ['Projetor'])
+        ->assertJsonPath('data.0.active', true)
+        ->assertJsonPath('data.0.availability', null)
+        ->assertJsonPath('data.1.id', $inactive->id)
+        ->assertJsonPath('data.1.active', false);
+});
+
+it('filters rooms by minimum capacity', function () {
+    Room::factory()->create(['capacity' => 9]);
+    $exact = Room::factory()->create(['capacity' => 10]);
+    $large = Room::factory()->create(['capacity' => 11]);
+
+    $response = $this->getJson('/api/rooms?min_capacity=10');
+
+    $response->assertOk()
+        ->assertJsonCount(2, 'data')
+        ->assertJsonPath('data.0.id', $exact->id)
+        ->assertJsonPath('data.1.id', $large->id);
+});
+
+it('filters rooms by resource ignoring case', function () {
+    $withProjector = Room::factory()->create();
+    $withProjector->resources()->create(['name' => 'Projetor', 'name_normalized' => 'projetor']);
+    $withBoard = Room::factory()->create();
+    $withBoard->resources()->create(['name' => 'Quadro', 'name_normalized' => 'quadro']);
+
+    $response = $this->getJson('/api/rooms?resource='.urlencode(' PROJETOR '));
+
+    $response->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $withProjector->id);
+});
+
+it('applies capacity and resource together', function () {
+    $match = Room::factory()->create(['capacity' => 20]);
+    $match->resources()->create(['name' => 'Projetor', 'name_normalized' => 'projetor']);
+    $tooSmall = Room::factory()->create(['capacity' => 4]);
+    $tooSmall->resources()->create(['name' => 'Projetor', 'name_normalized' => 'projetor']);
+    $wrongResource = Room::factory()->create(['capacity' => 20]);
+    $wrongResource->resources()->create(['name' => 'Quadro', 'name_normalized' => 'quadro']);
+
+    $response = $this->getJson('/api/rooms?min_capacity=10&resource=projetor');
+
+    $response->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $match->id);
+});
+
+it('returns every room when filters are blank', function () {
+    $first = Room::factory()->create(['capacity' => 2]);
+    $second = Room::factory()->inactive()->create(['capacity' => 50]);
+
+    $response = $this->getJson('/api/rooms?min_capacity=&resource=');
+
+    $response->assertOk()
+        ->assertJsonCount(2, 'data')
+        ->assertJsonPath('data.0.id', $first->id)
+        ->assertJsonPath('data.1.id', $second->id);
+});
+
+it('rejects an invalid minimum capacity', function () {
+    Room::factory()->create(['capacity' => 10]);
+
+    $response = $this->getJson('/api/rooms?min_capacity=0');
+
+    $response->assertUnprocessable()
+        ->assertJsonPath('message', 'A capacidade deve ser um número inteiro de 1 a 999');
+
+    expect($response->content())->not->toContain('disponivel');
+});
+
+it('marks an overlapping active room indisponivel', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+    Reservation::factory()->for($room)->create([
+        'date' => '2026-03-10',
+        'starts_at' => '09:30',
+        'ends_at' => '10:30',
+    ]);
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'indisponivel');
+});
+
+it('marks a free active room disponivel', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
+});
+
+it('leaves an inactive room without availability', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->inactive()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonCount(1, 'data')
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.active', false)
+        ->assertJsonPath('data.0.availability', null);
+});
+
+it('treats a touching reservation as free', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+    Reservation::factory()->for($room)->create([
+        'date' => '2026-03-10',
+        'starts_at' => '08:00',
+        'ends_at' => '09:00',
+    ]);
+    Reservation::factory()->for($room)->create([
+        'date' => '2026-03-10',
+        'starts_at' => '10:00',
+        'ends_at' => '11:00',
+    ]);
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
+});
+
+it('ignores a reservation on another room', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+    $other = Room::factory()->create();
+    Reservation::factory()->for($other)->create([
+        'date' => '2026-03-10',
+        'starts_at' => '09:30',
+        'ends_at' => '10:30',
+    ]);
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel')
+        ->assertJsonPath('data.1.id', $other->id)
+        ->assertJsonPath('data.1.availability', 'indisponivel');
+});
+
+it('ignores a reservation on another date', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+    Reservation::factory()->for($room)->create([
+        'date' => '2026-03-11',
+        'starts_at' => '09:30',
+        'ends_at' => '10:30',
+    ]);
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=10:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
+});
+
+it('rejects an availability query outside business hours', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=07:00&end=09:00');
+
+    $response->assertUnprocessable()
+        ->assertJsonPath('message', 'Reservas permitidas apenas entre 8h e 18h');
+
+    expect($response->content())->not->toContain('disponivel');
+});
+
+it('rejects an availability query over 4 hours', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=13:01');
+
+    $response->assertUnprocessable()
+        ->assertJsonPath('message', 'Duração máxima permitida é de 4 horas');
+
+    expect($response->content())->not->toContain('disponivel');
+});
+
+it('rejects an availability query whose end is not after its start', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=10:00&end=10:00');
+
+    $response->assertUnprocessable()
+        ->assertJsonPath('message', 'Horário de fim deve ser posterior ao horário de início');
+
+    expect($response->content())->not->toContain('disponivel');
+});
+
+it('rejects an availability query before today', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-09&start=09:00&end=10:00');
+
+    $response->assertUnprocessable()
+        ->assertJsonPath('message', 'A data não pode ser anterior a hoje');
+
+    expect($response->content())->not->toContain('disponivel');
+});
+
+it('reports only the first failing availability check', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    Room::factory()->create();
+
+    $this->getJson('/api/rooms?date=2026-03-09&start=19:00&end=07:00')
+        ->assertUnprocessable()
+        ->assertJsonPath('message', 'Horário de fim deve ser posterior ao horário de início');
+
+    $this->getJson('/api/rooms?date=2026-03-09&start=07:00&end=19:00')
+        ->assertUnprocessable()
+        ->assertJsonPath('message', 'A data não pode ser anterior a hoje');
+
+    $this->getJson('/api/rooms?date=2026-03-10&start=07:00&end=19:00')
+        ->assertUnprocessable()
+        ->assertJsonPath('message', 'Reservas permitidas apenas entre 8h e 18h');
+});
+
+it('accepts a duration of exactly 4 hours', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=09:00&end=13:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
+});
+
+it('accepts a start of 08:00', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=08:00&end=12:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
+});
+
+it('accepts an end of 18:00', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+    $room = Room::factory()->create();
+
+    $response = $this->getJson('/api/rooms?date=2026-03-10&start=14:00&end=18:00');
+
+    $response->assertOk()
+        ->assertJsonPath('data.0.id', $room->id)
+        ->assertJsonPath('data.0.availability', 'disponivel');
 });
