@@ -939,8 +939,8 @@ Proof: run salas | it serves salas actions with no credentials
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) returned @ a5dd25f; batch worker phases 5–6 (T22–T28) — sent, not yet returned
-**Walked:** none
+**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) returned @ a5dd25f; batch worker phases 5–6 (T22–T28) returned @ 562521a; verifier and screens sub-agent — sent
+**Walked:** 2026-11-06 — dev Postgres container was stopped, so the walk used `php artisan serve` on http://127.0.0.1:8010 with `DB_CONNECTION=sqlite` `DB_DATABASE=/tmp/salas-walk.sqlite` and the Vite dev server already on port 5174. Seeded Sala 101 (id 1, active, Projetor, Quadro Branco, Videoconferência), 102, 201, 202 active, and Sala 301 (id 5, inactive). Chrome headless 1280×900 on `/salas` shows heading `Salas`, filters `Capacidade mínima`/`Recurso`/`Filtrar`/`Limpar`, `Consultar disponibilidade`, `Nova sala`, and cards in 3 columns with `Capacidade: N pessoas`, tags, `Ativa` or `Inativa`. Saved `captures/salas-list.running.png` from that window. At 768×900 the same URL stacks one card per row. `/salas/1` shows Sala 101 with `Reservar`, `Editar`, `Inativar`. `/salas/5` shows Sala 301 `Inativa` with `Editar` and `Ativar` and no `Reservar`. `/salas/nova` shows Nome, Capacidade, Recursos, `Ativa` checked. `/salas/1/reservar` shows Sala, Data, Hora Início, Hora Fim, Assunto, with Sala 101 selected. Loading, error, empty-filter, and success-message states were not clicked in the browser.
 
 ---
 
