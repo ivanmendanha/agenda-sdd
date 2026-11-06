@@ -175,9 +175,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `room_id` is a foreign key that cascades on delete
-- [ ] Unique index is `(room_id, name_normalized)`
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `room_id` is a foreign key that cascades on delete
+- [x] Unique index is `(room_id, name_normalized)`
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - schema layer
 **Gate**: build
