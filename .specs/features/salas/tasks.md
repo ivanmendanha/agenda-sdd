@@ -676,10 +676,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Routes are `/salas`, `/salas/nova`, `/salas/:id`, `/salas/:id/editar`, and `/salas/:id/reservar`
-- [ ] They render inside `Shell`
-- [ ] `npm run typecheck` and `npm run build` succeed
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] Routes are `/salas`, `/salas/nova`, `/salas/:id`, `/salas/:id/editar`, and `/salas/:id/reservar`
+- [x] They render inside `Shell`
+- [x] `npm run typecheck` and `npm run build` succeed
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - route wiring, typecheck and build
 **Gate**: build
