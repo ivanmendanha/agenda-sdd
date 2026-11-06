@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "tailwindcss-development": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "skillPath": ".ai/tailwindcss/3/skill/tailwindcss-development/SKILL.md",
+      "computedHash": "31467d5afee4fa22fcc7068db29699a0ddf72334c19ab07927e1782655c83505"
+    }
+  }
+}

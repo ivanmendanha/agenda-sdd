@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salas — card frame from the mockup</title>
+    <style>
+        :root {
+            --text-primary: #262626;
+            --text-secondary: #595959;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F5F7FA;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .card {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .room-card {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .room-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .room-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .room-capacity {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: var(--bg-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--
+        Binding frame for the room card only.
+        The heading below is what the mockup draws. The product heading is `Salas` (AD-008).
+        Sample names are the mockup's sample data, not a seed requirement.
+    -->
+    <div class="container">
+        <div class="card">
+            <h2 class="card-title">Salas Disponíveis</h2>
+            <div class="grid grid-3">
+                <div class="room-card">
+                    <div class="room-name">Sala 101</div>
+                    <div class="room-capacity">Capacidade: 8 pessoas</div>
+                    <div class="room-features">
+                        <span class="feature-tag">Projetor</span>
+                        <span class="feature-tag">Quadro Branco</span>
+                        <span class="feature-tag">Videoconferência</span>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-name">Sala 102</div>
+                    <div class="room-capacity">Capacidade: 4 pessoas</div>
+                    <div class="room-features">
+                        <span class="feature-tag">Quadro Branco</span>
+                        <span class="feature-tag">TV</span>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-name">Sala 201</div>
+                    <div class="room-capacity">Capacidade: 12 pessoas</div>
+                    <div class="room-features">
+                        <span class="feature-tag">Projetor</span>
+                        <span class="feature-tag">Videoconferência</span>
+                        <span class="feature-tag">Sistema de Som</span>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-name">Sala 202</div>
+                    <div class="room-capacity">Capacidade: 6 pessoas</div>
+                    <div class="room-features">
+                        <span class="feature-tag">Projetor</span>
+                        <span class="feature-tag">Quadro Branco</span>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-name">Sala 301</div>
+                    <div class="room-capacity">Capacidade: 20 pessoas</div>
+                    <div class="room-features">
+                        <span class="feature-tag">Projetor</span>
+                        <span class="feature-tag">Videoconferência</span>
+                        <span class="feature-tag">Sistema de Som</span>
+                        <span class="feature-tag">Palco</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
