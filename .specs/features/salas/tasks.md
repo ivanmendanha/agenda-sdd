@@ -347,10 +347,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Active rooms receive `disponivel` or `indisponivel` only after a valid interval. Inactive rooms stay in the list with no availability flag
-- [ ] `tests/Feature/Salas/ListRoomsTest.php` passes these tests: `query returns every stored room`, `query filters by minimum capacity`, `query filters by resource ignoring case`, `query applies capacity and resource together`, `query returns every room when filters are blank`, `query marks an overlapping active room indisponivel`, `query marks a free active room disponivel`, `query leaves an inactive room without availability`, `query treats a touching reservation as free`, `query ignores another room`, `query ignores another date`
-- [ ] Test count: 11 tests pass
-- [ ] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
+- [x] Active rooms receive `disponivel` or `indisponivel` only after a valid interval. Inactive rooms stay in the list with no availability flag
+- [x] `tests/Feature/Salas/ListRoomsTest.php` passes these tests: `query returns every stored room`, `query filters by minimum capacity`, `query filters by resource ignoring case`, `query applies capacity and resource together`, `query returns every room when filters are blank`, `query marks an overlapping active room indisponivel`, `query marks a free active room disponivel`, `query leaves an inactive room without availability`, `query treats a touching reservation as free`, `query ignores another room`, `query ignores another date`
+- [x] Test count: 11 tests pass
+- [x] Gate check passes: `php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: quick
