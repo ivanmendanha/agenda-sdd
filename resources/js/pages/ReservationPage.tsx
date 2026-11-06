@@ -45,11 +45,12 @@ export default function ReservationPage() {
 
             setSuccess('Reserva criada com sucesso!');
         } catch (error) {
-            setMessage(
-                error instanceof ApiError && error.message !== ''
-                    ? error.message
-                    : 'Não foi possível criar a reserva',
-            );
+            const showsServerSentence =
+                error instanceof ApiError &&
+                (error.status === 422 || error.status === 409 || error.status === 404) &&
+                error.message !== '';
+
+            setMessage(showsServerSentence ? error.message : 'Não foi possível criar a reserva');
         }
     };
 

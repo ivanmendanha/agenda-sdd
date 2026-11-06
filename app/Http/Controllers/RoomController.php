@@ -90,7 +90,9 @@ class RoomController extends Controller
             'active' => $data['active'] ?? $room->active,
         ]);
 
-        $this->syncResources($room, $data['resources'] ?? []);
+        if (is_array($data['resources'] ?? null)) {
+            $this->syncResources($room, $data['resources']);
+        }
 
         return RoomResource::make($room->load('resources'));
     }

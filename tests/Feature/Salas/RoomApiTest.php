@@ -441,6 +441,25 @@ it('updates a room', function () {
     ]);
 });
 
+it('keeps resource tags when an update omits them', function () {
+    $room = Room::factory()->create(['name' => 'Sala Alfa', 'capacity' => 10, 'active' => true]);
+    $room->resources()->create(['name' => 'Quadro', 'name_normalized' => 'quadro']);
+
+    $response = $this->putJson("/api/rooms/{$room->id}", [
+        'name' => 'Sala Beta',
+        'capacity' => 12,
+    ]);
+
+    $response->assertOk()
+        ->assertJsonPath('data.resources', ['Quadro'])
+        ->assertJsonPath('data.active', true);
+
+    $this->assertDatabaseHas('room_resources', [
+        'room_id' => $room->id,
+        'name' => 'Quadro',
+    ]);
+});
+
 it('activates a room', function () {
     $room = Room::factory()->inactive()->create();
 

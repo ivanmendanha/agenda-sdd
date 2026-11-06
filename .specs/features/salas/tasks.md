@@ -773,7 +773,7 @@ Proof: run salas | it rejects an invalid minimum capacity
 Proof: run salas | it marks a free active room disponivel
 
 **C27** - Overlap is start before the confirmed end and end after the confirmed start, same room and date (SALA-27, AC 2)
-Proof: run salas | it marks an overlapping active room indisponivel
+Proof: run salas | it treats a touching reservation as free
 
 **C28** - An overlapping confirmed reservation shows `Indisponível` (SALA-28, AC 3)
 Proof: run salas | it marks an overlapping active room indisponivel
@@ -860,7 +860,7 @@ Proof: run salas | it rejects a reservation over 4 hours
 Proof: run salas | it uses the first failing check on create
 
 **C56** - An unknown room on create returns HTTP 404 `Sala não encontrada` and stores nothing (SALA-56, AC 14)
-Proof: run salas | it returns 404 when the room does not exist
+Proof: run salas | it returns 404 when the reservation room does not exist
 
 **C57** - Create checks the conflict again after a query that showed `Disponível` (SALA-57, AC 15)
 Proof: run salas | it rechecks the conflict at create time
@@ -939,8 +939,8 @@ Proof: run salas | it serves salas actions with no credentials
 ## Handoff
 
 **Settled mid-build:** none
-**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) returned @ a5dd25f; batch worker phases 5–6 (T22–T28) returned @ 562521a; verifier and screens sub-agent — sent
-**Walked:** 2026-11-06 — dev Postgres container was stopped, so the walk used `php artisan serve` on http://127.0.0.1:8010 with `DB_CONNECTION=sqlite` `DB_DATABASE=/tmp/salas-walk.sqlite` and the Vite dev server already on port 5174. Seeded Sala 101 (id 1, active, Projetor, Quadro Branco, Videoconferência), 102, 201, 202 active, and Sala 301 (id 5, inactive). Chrome headless 1280×900 on `/salas` shows heading `Salas`, filters `Capacidade mínima`/`Recurso`/`Filtrar`/`Limpar`, `Consultar disponibilidade`, `Nova sala`, and cards in 3 columns with `Capacidade: N pessoas`, tags, `Ativa` or `Inativa`. Saved `captures/salas-list.running.png` from that window. At 768×900 the same URL stacks one card per row. `/salas/1` shows Sala 101 with `Reservar`, `Editar`, `Inativar`. `/salas/5` shows Sala 301 `Inativa` with `Editar` and `Ativar` and no `Reservar`. `/salas/nova` shows Nome, Capacidade, Recursos, `Ativa` checked. `/salas/1/reservar` shows Sala, Data, Hora Início, Hora Fim, Assunto, with Sala 101 selected. Loading, error, empty-filter, and success-message states were not clicked in the browser.
+**Dispatched:** batch worker phases 1–2 (T1–T10) returned @ 197a188; batch worker phases 3–4 (T11–T21) returned @ a5dd25f; batch worker phases 5–6 (T22–T28) returned @ 562521a; verifier returned (FAIL, 17 findings); screens sub-agent returned (salas-list matches)
+**Walked:** 2026-11-06 — dev Postgres was stopped, so the walk used `php artisan serve` on http://127.0.0.1:8010 with `DB_CONNECTION=sqlite` `DB_DATABASE=/tmp/salas-walk.sqlite` and Vite on port 5174. No login. Seeded Sala 101 (id 1, active), 102, 201, 202 active, Sala 301 (id 5, inactive), plus a confirmed reservation on Sala 101 for 2026-11-06 09:30–10:30. Chrome 1280×900 on `/salas` shows heading `Salas`, the capacity and resource filters, `Consultar disponibilidade`, `Nova sala`, and 3 columns; `captures/salas-list.running.png` is that window. At 768×900 the cards are one column. Slowing `GET /api/rooms` shows `Carregando salas...`, a 500 shows `Não foi possível carregar as salas` and `Tentar novamente`, and that button issues a new list request and brings the cards back. An empty list response shows `Nenhuma sala cadastrada`. Capacity 999 plus resource `Inexistente` then `Filtrar` shows `Nenhuma sala encontrada`; `Limpar` empties both fields and lists every room. `Consultar disponibilidade` for 2026-11-06 09:00–10:00 shows `Indisponível` on Sala 101, `Disponível` on Sala 102, and Sala 301 stays `Inativa` without either availability word. With 20 extra rooms the page scrolled (scrollY 1212 of height 1912) and each card kept its name and `Capacidade: N pessoas`. `/salas/1` shows `Reservar`, `Editar`, `Inativar`. Slowing and failing that detail request shows `Carregando sala...`, then `Não foi possível carregar a sala` with `Tentar novamente`, and the retry loads Sala 101. `Editar` opens `/salas/1/editar` filled with Sala 101, capacity 8, `Projetor, Quadro Branco, Videoconferência`, and `Ativa` checked. A 500 on save shows `Não foi possível salvar a sala` and stays on the edit page. `/salas/5` shows `Inativa` with `Editar` and `Ativar` and no `Reservar`. `/salas/nova` shows Nome, Capacidade, Recursos, and `Ativa` checked. `/salas/1/reservar` has Sala 101 selected; submitting 2026-11-07 16:00–17:00 subject `Walk` shows `Reserva criada com sucesso!` on that same URL. A 500 whose body says `storage is down` shows `Não foi possível criar a reserva` and does not show the server sentence.
 
 ---
 

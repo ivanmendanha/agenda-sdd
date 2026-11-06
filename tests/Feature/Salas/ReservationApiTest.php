@@ -167,6 +167,17 @@ it('rejects a reservation outside business hours', function () {
         ->assertJsonPath('message', 'Reservas permitidas apenas entre 8h e 18h');
 
     $this->assertDatabaseCount('reservations', 0);
+
+    $this->postJson('/api/reservations', [
+        'room_id' => $room->id,
+        'date' => '2026-03-10',
+        'start' => '09:00',
+        'end' => '13:01',
+        'subject' => 'Planejamento',
+    ])->assertUnprocessable()
+        ->assertJsonPath('message', 'Duração máxima permitida é de 4 horas');
+
+    $this->assertDatabaseCount('reservations', 0);
 });
 
 it('rejects a reservation over 4 hours', function () {
@@ -403,6 +414,23 @@ it('ignores an unconfirmed reservation', function () {
         'ends_at' => '10:30',
         'status' => 'confirmed',
     ]);
+});
+
+it('returns 404 when the reservation room does not exist', function () {
+    $this->travelTo('2026-03-10 12:00:00');
+
+    $response = $this->postJson('/api/reservations', [
+        'room_id' => 404,
+        'date' => '2026-03-10',
+        'start' => '09:00',
+        'end' => '10:00',
+        'subject' => 'Planejamento',
+    ]);
+
+    $response->assertNotFound()
+        ->assertExactJson(['message' => 'Sala não encontrada']);
+
+    $this->assertDatabaseCount('reservations', 0);
 });
 
 it('serves salas actions with no credentials', function () {
