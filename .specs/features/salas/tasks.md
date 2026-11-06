@@ -154,9 +154,9 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `resources()` and `reservations()` are declared with return types
-- [ ] `active` is cast to boolean
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `resources()` and `reservations()` are declared with return types
+- [x] `active` is cast to boolean
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - entity layer
 **Gate**: build
