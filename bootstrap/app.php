@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\Room;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,4 +22,18 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+
+        $exceptions->render(function (NotFoundHttpException $exception, Request $request) {
+            $missing = $exception->getPrevious();
+
+            if (! $request->is('api/*') || ! $missing instanceof ModelNotFoundException) {
+                return null;
+            }
+
+            if ($missing->getModel() !== Room::class) {
+                return null;
+            }
+
+            return response()->json(['message' => 'Sala não encontrada'], 404);
+        });
     })->create();

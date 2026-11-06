@@ -401,3 +401,10 @@ it('shows one room', function () {
         ->assertJsonPath('data.active', true)
         ->assertJsonPath('data.availability', null);
 });
+
+it('returns 404 when the room does not exist', function () {
+    $response = $this->getJson('/api/rooms/404');
+
+    $response->assertNotFound()
+        ->assertExactJson(['message' => 'Sala não encontrada']);
+});

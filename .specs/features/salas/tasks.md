@@ -455,10 +455,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] Unknown room id returns `{ "message": "Sala não encontrada" }` and HTTP 404
-- [ ] `RoomApiTest.php` passes `it returns 404 when the room does not exist`
-- [ ] Test count: 1 new test passes
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] Unknown room id returns `{ "message": "Sala não encontrada" }` and HTTP 404
+- [x] `RoomApiTest.php` passes `it returns 404 when the room does not exist`
+- [x] Test count: 1 new test passes
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full

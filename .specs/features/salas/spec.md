@@ -289,7 +289,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-12 | P1: Room details | Specify | Pending |
 | SALA-13 | P1: Room details | Specify | Pending |
 | SALA-14 | P1: Room details | Specify | Pending |
-| SALA-15 | P1: Room details | Specify | Pending |
+| SALA-15 | P1: Room details | Specify | Implementing |
 | SALA-16 | P1: Room details | Specify | Pending |
 | SALA-17 | P1: Room details | Specify | Pending |
 | SALA-18 | P1: Filter rooms | Specify | Implementing |
@@ -330,7 +330,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-53 | P1: Reservation page | Specify | Pending |
 | SALA-54 | P1: Reservation page | Specify | Pending |
 | SALA-55 | P1: Reservation page | Specify | Pending |
-| SALA-56 | P1: Reservation page | Specify | Pending |
+| SALA-56 | P1: Reservation page | Specify | Implementing |
 | SALA-57 | P1: Reservation page | Specify | Pending |
 | SALA-58 | P1: Reservation page | Specify | Pending |
 | SALA-59 | P1: Concurrent reservation | Specify | Implementing |
