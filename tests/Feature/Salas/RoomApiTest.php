@@ -386,3 +386,18 @@ it('accepts an end of 18:00', function () {
         ->assertJsonPath('data.0.id', $room->id)
         ->assertJsonPath('data.0.availability', 'disponivel');
 });
+
+it('shows one room', function () {
+    $room = Room::factory()->create(['name' => 'Sala Alfa', 'capacity' => 12]);
+    $room->resources()->create(['name' => 'Projetor', 'name_normalized' => 'projetor']);
+
+    $response = $this->getJson("/api/rooms/{$room->id}");
+
+    $response->assertOk()
+        ->assertJsonPath('data.id', $room->id)
+        ->assertJsonPath('data.name', 'Sala Alfa')
+        ->assertJsonPath('data.capacity', 12)
+        ->assertJsonPath('data.resources', ['Projetor'])
+        ->assertJsonPath('data.active', true)
+        ->assertJsonPath('data.availability', null);
+});

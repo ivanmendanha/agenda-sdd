@@ -69,6 +69,14 @@ class RoomController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Room $room): RoomResource
+    {
+        return RoomResource::make($room->load('resources'));
+    }
+
+    /**
      * Replace the room's resource tags, keeping the first spelling of a duplicate.
      *
      * @param  array<int, string|null>  $names
