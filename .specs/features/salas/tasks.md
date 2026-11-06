@@ -521,10 +521,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] No request field is required to confirm the action
-- [ ] `RoomApiTest.php` passes `it inactivates a room`, `it keeps confirmed reservations when a room is inactivated`, `it keeps the room row when a room is inactivated`
-- [ ] Test count: 3 new tests pass
-- [ ] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
+- [x] No request field is required to confirm the action
+- [x] `RoomApiTest.php` passes `it inactivates a room`, `it keeps confirmed reservations when a room is inactivated`, `it keeps the room row when a room is inactivated`
+- [x] Test count: 3 new tests pass
+- [x] Gate check passes: `vendor/bin/pint --dirty --format agent; php artisan test tests/Feature/Salas --testdox`
 
 **Tests**: feature
 **Gate**: full

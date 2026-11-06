@@ -349,10 +349,10 @@ IDs follow story order, then criterion order inside the story.
 | SALA-72 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-73 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-74 | P1: Register and edit rooms | Specify | Implementing |
-| SALA-75 | P1: Activate and inactivate | Specify | Pending |
+| SALA-75 | P1: Activate and inactivate | Specify | Implementing |
 | SALA-76 | P1: Activate and inactivate | Specify | Implementing |
-| SALA-77 | P1: Activate and inactivate | Specify | Pending |
-| SALA-78 | P1: Activate and inactivate | Specify | Pending |
+| SALA-77 | P1: Activate and inactivate | Specify | Implementing |
+| SALA-78 | P1: Activate and inactivate | Specify | Implementing |
 | SALA-79 | P1: Activate and inactivate | Specify | Pending |
 | SALA-80 | P1: Public access | Specify | Pending |
 

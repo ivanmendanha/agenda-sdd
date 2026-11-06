@@ -452,3 +452,36 @@ it('activates a room', function () {
 
     $this->assertDatabaseHas('rooms', ['id' => $room->id, 'active' => true]);
 });
+
+it('inactivates a room', function () {
+    $room = Room::factory()->create();
+
+    $response = $this->postJson("/api/rooms/{$room->id}/inactivate");
+
+    $response->assertOk()
+        ->assertJsonPath('data.id', $room->id)
+        ->assertJsonPath('data.active', false);
+
+    $this->assertDatabaseHas('rooms', ['id' => $room->id, 'active' => false]);
+});
+
+it('keeps confirmed reservations when a room is inactivated', function () {
+    $room = Room::factory()->create();
+    $reservation = Reservation::factory()->for($room)->create();
+
+    $this->postJson("/api/rooms/{$room->id}/inactivate")->assertOk();
+
+    $this->assertDatabaseHas('reservations', [
+        'id' => $reservation->id,
+        'room_id' => $room->id,
+        'status' => 'confirmed',
+    ]);
+});
+
+it('keeps the room row when a room is inactivated', function () {
+    $room = Room::factory()->create();
+
+    $this->postJson("/api/rooms/{$room->id}/inactivate")->assertOk();
+
+    $this->assertModelExists($room);
+});
