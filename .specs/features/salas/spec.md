@@ -339,7 +339,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-62 | P1: Register and edit rooms | Specify | Pending |
 | SALA-63 | P1: Register and edit rooms | Specify | Pending |
 | SALA-64 | P1: Register and edit rooms | Specify | Pending |
-| SALA-65 | P1: Register and edit rooms | Specify | Pending |
+| SALA-65 | P1: Register and edit rooms | Specify | Implementing |
 | SALA-66 | P1: Register and edit rooms | Specify | Pending |
 | SALA-67 | P1: Register and edit rooms | Specify | Pending |
 | SALA-68 | P1: Register and edit rooms | Specify | Pending |
