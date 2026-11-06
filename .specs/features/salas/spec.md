@@ -319,7 +319,7 @@ IDs follow story order, then criterion order inside the story.
 | SALA-42 | P1: Availability query | Specify | Implementing |
 | SALA-43 | P1: Reservation page | Specify | Pending |
 | SALA-44 | P1: Reservation page | Specify | Pending |
-| SALA-45 | P1: Reservation page | Specify | Pending |
+| SALA-45 | P1: Reservation page | Specify | Implementing |
 | SALA-46 | P1: Reservation page | Specify | Pending |
 | SALA-47 | P1: Reservation page | Specify | Pending |
 | SALA-48 | P1: Reservation page | Specify | Pending |

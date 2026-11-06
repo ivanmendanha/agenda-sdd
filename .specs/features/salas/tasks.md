@@ -217,10 +217,10 @@ T22 → T23 → T24 → T25 → T26 → T27 → T28
 
 **Done when**:
 
-- [ ] `room_id` restricts on delete
-- [ ] `starts_at` and `ends_at` are `char(5)`, `subject` is string 200, `status` defaults to `confirmed`
-- [ ] Index is `(room_id, date, status)`
-- [ ] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
+- [x] `room_id` restricts on delete
+- [x] `starts_at` and `ends_at` are `char(5)`, `subject` is string 200, `status` defaults to `confirmed`
+- [x] Index is `(room_id, date, status)`
+- [x] Gate check passes: `npm run build; npm run typecheck; vendor/bin/pint --dirty --format agent; php artisan test`
 
 **Tests**: none - schema layer
 **Gate**: build
