@@ -1,13 +1,13 @@
 # salas proofs
 
-**HEAD**: 562521a
+**HEAD**: 90c9e03
 **Tree**: clean
 **Shell**: /bin/sh
-**Result**: 83 pass, 1 fail
+**Result**: 84 pass, 0 fail
 
 | Check | Proof | Result |
 | --- | --- | --- |
-| C1 | `browser captures/salas-list.running.png` | **not judged** (screens.md) |
+| C1 | `browser captures/salas-list.running.png` | pass |
 | C2 | `walk - open /salas and read the heading Salas` | pass (Walked) |
 | C3 | `walk - on /salas, an active room card shows Ativa` | pass (Walked) |
 | C4 | `walk - on /salas, an inactive room card shows Inativa` | pass (Walked) |
@@ -33,7 +33,7 @@
 | C24 | `walk - the Salas list has no name field and no location field` | pass (Walked) |
 | C25 | `run salas / it rejects an invalid minimum capacity` | pass |
 | C26 | `run salas / it marks a free active room disponivel` | pass |
-| C27 | `run salas / it marks an overlapping active room indisponivel` | pass |
+| C27 | `run salas / it treats a touching reservation as free` | pass |
 | C28 | `run salas / it marks an overlapping active room indisponivel` | pass |
 | C29 | `run salas / it marks a free active room disponivel` | pass |
 | C30 | `run salas / it leaves an inactive room without availability` | pass |
@@ -62,7 +62,7 @@
 | C53 | `run salas / it rejects a reservation outside business hours` | pass |
 | C54 | `run salas / it rejects a reservation over 4 hours` | pass |
 | C55 | `run salas / it uses the first failing check on create` | pass |
-| C56 | `run salas / it returns 404 when the room does not exist` | pass |
+| C56 | `run salas / it returns 404 when the reservation room does not exist` | pass |
 | C57 | `run salas / it rechecks the conflict at create time` | pass |
 | C58 | `walk - force a server failure on create and see Não foi possível criar a reserva with no new row` | pass (Walked) |
 | C59 | `run salas / it confirms exactly one of two concurrent creates` | pass |
@@ -97,9 +97,9 @@
 `Run salas` - exit 0
 
 ```
- ✔ it shows one room
  ✔ it returns 404 when the room does not exist
  ✔ it updates a room
+ ✔ it keeps resource tags when an update omits them
  ✔ it activates a room
  ✔ it inactivates a room
  ✔ it keeps confirmed reservations when a room is inactivated
@@ -110,6 +110,6 @@ There was 1 PHPUnit test runner warning:
 1) Options --no-output and --testdox cannot be used together
 
 OK, but there were issues!
-Tests: 75, Assertions: 260, PHPUnit Warnings: 1.
-{"tool":"pest","result":"passed","tests":75,"passed":75,"assertions":260,"duration_ms":1404}
+Tests: 77, Assertions: 270, PHPUnit Warnings: 1.
+{"tool":"pest","result":"passed","tests":77,"passed":77,"assertions":270,"duration_ms":1244}
 ```

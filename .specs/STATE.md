@@ -92,8 +92,8 @@
 
 ## Handoff
 
-- **Feature**: app-layout
+- **Feature**: salas
 - **Phase**: Done — validate_verification green
-- **Completed**: T1–T7, walk, screens matches, verification findings closed
-- **Next**: Domain page features (Dashboard / Salas / Minhas Reservas) against the shared chrome
-- **Branch**: master
+- **Completed**: T1–T28, walk, screens matches, verification findings closed in 90c9e03
+- **Next**: Dashboard and Minhas Reservas bodies
+- **Branch**: main

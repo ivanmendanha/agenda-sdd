@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 3,
+  "next_id": 8,
   "lessons": [
     {
       "id": "L-001",
@@ -40,6 +40,96 @@
       ],
       "created": "2026-11-04T22:16:40Z",
       "last_seen": "2026-11-04T22:16:40Z"
+    },
+    {
+      "id": "L-003",
+      "key": "weak_test::point a proof at a test that calls the same route and reads the same status the criterion fixes",
+      "text": "Point a proof at a test that calls the same route and reads the same status the criterion fixes.",
+      "signal": "weak_test",
+      "scope": "api",
+      "status": "candidate",
+      "features": [
+        "salas"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C56 (api)"
+      ],
+      "created": "2026-11-06T19:10:11Z",
+      "last_seen": "2026-11-06T19:10:11Z"
+    },
+    {
+      "id": "L-004",
+      "key": "weak_test::when one criterion fixes two limits the named test asserts both limits",
+      "text": "When one criterion fixes two limits, the named test asserts both limits.",
+      "signal": "weak_test",
+      "scope": "api",
+      "status": "candidate",
+      "features": [
+        "salas"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C42 (api)"
+      ],
+      "created": "2026-11-06T19:10:11Z",
+      "last_seen": "2026-11-06T19:10:11Z"
+    },
+    {
+      "id": "L-005",
+      "key": "weak_test::prove a strict interval bound with a touching case not with an overlap a non strict comparison would also reject",
+      "text": "Prove a strict interval bound with a touching case, not with an overlap a non-strict comparison would also reject.",
+      "signal": "weak_test",
+      "scope": "api",
+      "status": "candidate",
+      "features": [
+        "salas"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "C27 (api)"
+      ],
+      "created": "2026-11-06T19:10:11Z",
+      "last_seen": "2026-11-06T19:10:11Z"
+    },
+    {
+      "id": "L-006",
+      "key": "ac_gap::on a failure other than validation conflict or not found show the page fallback sentence instead of the server message",
+      "text": "On a failure other than validation, conflict, or not-found, show the page fallback sentence instead of the server message.",
+      "signal": "ac_gap",
+      "scope": "ui",
+      "status": "candidate",
+      "features": [
+        "salas"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "SALA-58 (ui)"
+      ],
+      "created": "2026-11-06T19:10:12Z",
+      "last_seen": "2026-11-06T19:10:12Z"
+    },
+    {
+      "id": "L-007",
+      "key": "ac_gap::when an update keeps an omitted flag keep an omitted collection too and test the request that leaves the key out",
+      "text": "When an update keeps an omitted flag, keep an omitted collection too, and test the request that leaves the key out.",
+      "signal": "ac_gap",
+      "scope": "api",
+      "status": "candidate",
+      "features": [
+        "salas"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "RoomController.php:93 (api)"
+      ],
+      "created": "2026-11-06T19:10:12Z",
+      "last_seen": "2026-11-06T19:10:12Z"
     }
   ]
 }
